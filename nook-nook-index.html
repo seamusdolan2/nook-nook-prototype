@@ -1,0 +1,4561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nook Nook Industries - Section 1 Mock-up</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+            background: #FFFEF9;
+        }
+
+        /* ============================================
+           CSS CUSTOM PROPERTIES
+           ============================================ */
+        :root {
+            /* Font Families */
+            --nook-font-serif: Georgia, serif;
+            --nook-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+            /* Desktop Font Sizes */
+            --nook-text-hero: 48px;
+            --nook-text-body: 18px;
+
+            /* Line Heights */
+            --nook-lh-relaxed: 1.6;
+            --nook-lh-loose: 1.8;
+
+            /* Colors */
+            --nook-white: #FFFFFF;
+            --nook-cream-warm: #FFFEF9;
+            --nook-text-charcoal: #2B2B2B;
+            --nook-text-light: #6B6B6B;
+
+            /* Chapter 2 / Descent colors */
+            --nook-terracotta:  #d4664a;
+            --nook-tan:         #c8a882;
+            --nook-ghost:       #DDD4C8;
+            --nook-caption:     #9B8B7E;
+            --nook-warm-dark:   #3D3935;
+            --nook-cream-paper: #FBF8F3;
+            --nook-gold:        #C9A86A;
+            --nook-cool-gray:   #B8B4AE;
+
+            /* Descent section aliases — map to existing nook variables */
+            --cream:    var(--nook-cream-warm);
+            --terra:    var(--nook-terracotta);
+            --tan:      var(--nook-tan);
+            --ghost:    var(--nook-ghost);
+            --charcoal: var(--nook-text-charcoal);
+            --light:    var(--nook-text-light);
+            --gold:     var(--nook-gold);
+            --white:    var(--nook-white);
+
+            /* Chapter 5 terminal colors */
+            --terminal-green: rgba(76, 175, 80, 0.9);
+            --amber-warm: rgba(201, 168, 106, 1);
+        }
+
+        /* Mobile Typography Adjustments */
+        @media (max-width: 768px) {
+            :root {
+                --nook-text-hero: 32px;
+                --nook-text-body: 16px;
+            }
+        }
+
+        /* ============================================
+           CHAPTER TRANSITION HEADER
+           ============================================ */
+        .nook-chapter-transition {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(to bottom,
+                #ebebeb 0%,
+                #f0ebe5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 80px;
+            overflow: hidden;
+        }
+
+        /* LEFT: Wavy Textile Lines - Sequential weaving animation */
+        .nook-textile-pattern {
+            width: 180px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .nook-textile-pattern svg {
+            width: 100%;
+            height: 200px;
+        }
+
+        .nook-textile-pattern path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            transition: stroke-dashoffset 0.4s ease-out;
+        }
+
+        .nook-textile-pattern.animate path:nth-child(1) {
+            animation: nook-draw-line 0.4s ease-out 0.0s forwards;
+        }
+
+        .nook-textile-pattern.animate path:nth-child(2) {
+            animation: nook-draw-line 0.4s ease-out 0.1s forwards;
+        }
+
+        .nook-textile-pattern.animate path:nth-child(3) {
+            animation: nook-draw-line 0.4s ease-out 0.2s forwards;
+        }
+
+        .nook-textile-pattern.animate path:nth-child(4) {
+            animation: nook-draw-line 0.4s ease-out 0.3s forwards;
+        }
+
+        .nook-textile-pattern.animate path:nth-child(5) {
+            animation: nook-draw-line 0.4s ease-out 0.4s forwards;
+        }
+
+        .nook-textile-pattern.animate path:nth-child(6) {
+            animation: nook-draw-line 0.4s ease-out 0.5s forwards;
+        }
+
+        .nook-textile-pattern.animate path:nth-child(7) {
+            animation: nook-draw-line 0.4s ease-out 0.6s forwards;
+        }
+
+        .nook-textile-pattern.animate path:nth-child(8) {
+            animation: nook-draw-line 0.4s ease-out 0.7s forwards;
+        }
+
+        @keyframes nook-draw-line {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* CENTER: Brand Typography - Character by character fade */
+        .nook-brand-logo {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-direction: column;
+        }
+
+        .nook-brand-logo__main {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            line-height: 1;
+        }
+
+        .nook-brand-logo__nook {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 84px;
+            font-weight: 900;
+            color: #000000;
+            letter-spacing: -0.02em;
+            line-height: 0.9;
+        }
+
+        .nook-brand-logo__nook span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .nook-brand-logo__dot {
+            width: 16px;
+            height: 16px;
+            background: #d4664a;
+            border-radius: 50%;
+            margin: 0 8px;
+            align-self: center;
+            position: relative;
+            top: -8px;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        .nook-brand-logo__mats {
+            font-family: 'Brush Script MT', cursive, 'Comic Sans MS', sans-serif;
+            font-size: 52px;
+            font-weight: 400;
+            color: #000000;
+            font-style: italic;
+            position: relative;
+            top: -15px;
+            left: -10px;
+            letter-spacing: 0.02em;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        /* RIGHT: Organic Blob Shape - Spinning/expanding */
+        .nook-organic-shape {
+            width: 280px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            opacity: 0;
+            transform: scale(0.3) rotate(-90deg);
+            transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .nook-organic-shape.animate {
+            opacity: 1;
+            transform: scale(1.0) rotate(0deg);
+        }
+
+        .nook-organic-shape svg {
+            width: 220px;
+            height: 220px;
+        }
+
+        /* ============================================
+           DOT SEPARATOR ROW
+           ============================================ */
+        .nook-dot-separator {
+            width: 100%;
+            background: #FFFEF9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 80px 0;
+        }
+
+        .nook-dot-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .nook-journey-dot {
+            width: 7px;
+            height: 7px;
+            background: #c8a882;
+            border-radius: 50%;
+            flex-shrink: 0;
+
+            /* Initial state — invisible and collapsed */
+            opacity: 0;
+            transform: scale(0);
+
+            /* Same spring bounce easing as the blob */
+            transition:
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity   0.2s ease;
+            will-change: transform, opacity;
+        }
+
+        /* Visible state — triggered by JS */
+        .nook-journey-dot.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ============================================
+           SECTION 1: THE OPENING DUALITY
+           ============================================ */
+
+        /* Section 1 Container */
+        .nook-section-1 {
+            position: relative;
+            width: 100%;
+        }
+
+        /* Opening Text Stage — full viewport, pinned during fill animation */
+        .nook-product-reveal {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            background-color: var(--nook-cream-warm);
+            padding: 0 80px 10vh;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Opening paragraph text */
+        .nook-opening-text {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 36px;
+            font-weight: 500;
+            line-height: 1.65;
+            letter-spacing: 0.005em;
+            width: 100%;
+        }
+
+        /* Individual word spans — start as ghost, fill on scroll */
+        .nook-opening-word {
+            display: inline;
+            color: #DDD4C8;
+            will-change: color, transform;
+        }
+
+        /* ============================================
+           THRESHOLD IMAGE — end of Section 1
+           ============================================ */
+        .nook-threshold-section {
+            width: 100%;
+            background: var(--nook-cream-warm);
+        }
+
+        .nook-threshold-container {
+            width: 100%;
+            height: 82vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .nook-threshold-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+            transform: scale(1.0);
+            transform-origin: center center;
+            will-change: transform;
+        }
+
+        .nook-threshold-vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                ellipse 90% 90% at 50% 50%,
+                transparent 55%,
+                rgba(20, 16, 10, 0.28) 100%
+            );
+            pointer-events: none;
+        }
+
+        /* ============================================
+           CHAPTER BREAK — breathing room after photo
+           ============================================ */
+        .nook-chapter-break {
+            width: 100%;
+            height: 220px;
+            background: var(--nook-cream-warm);
+        }
+
+        /* ============================================
+           CHAPTER 2 — SPLIT STAGE
+           ============================================ */
+        .nook-story-page .ch2-stage {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            background: var(--nook-cream-warm);
+            position: relative;
+        }
+
+        /* LEFT: paragraph + cycling highlight */
+        .nook-story-page .ch2-left {
+            width: 44%;
+            height: 100%;
+            position: relative;
+            border-right: 1px solid #e4ddd4;
+            flex-shrink: 0;
+        }
+
+        .ch2-left-state {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 64px 56px 80px 80px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .ch2-left-state.is-first {
+            opacity: 1;
+        }
+
+        .ch2-chapter-label {
+            font-family: var(--nook-font-sans);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: var(--nook-tan);
+            margin-bottom: 28px;
+        }
+
+        .ch2-opening-para {
+            font-family: var(--nook-font-serif);
+            font-size: 17px;
+            line-height: 1.9;
+            color: var(--nook-text-light);
+            width: 100%;
+        }
+
+        .ch2-body-copy {
+            font-family: 'Lora', Georgia, serif;
+        }
+
+        .ch2-opening-para mark {
+            background: none;
+            color: var(--nook-text-charcoal);
+            border-bottom: 1.5px solid var(--nook-terracotta);
+            padding-bottom: 1px;
+        }
+
+        /* Graduated first-sentence word spans that were originally <mark> elements.
+           Using a class keeps the visual in CSS so it stays in sync with mark styles above. */
+        .ch2-graduated-mark {
+            color: var(--nook-text-charcoal);
+            border-bottom: 1.5px solid var(--nook-terracotta);
+            padding-bottom: 1px;
+        }
+
+        /* State counter dots */
+        .ch2-state-counter {
+            position: absolute;
+            bottom: 32px;
+            left: 80px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .ch2-sc-dots {
+            display: flex;
+            gap: 7px;
+        }
+
+        .ch2-sc-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--nook-ghost);
+            transition: background 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .ch2-sc-dot.on {
+            background: var(--nook-terracotta);
+        }
+
+        .ch2-sc-label {
+            font-family: var(--nook-font-sans);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--nook-caption);
+        }
+
+        .ch2-scroll-hint {
+            position: absolute;
+            bottom: 34px;
+            right: 32px;
+            font-family: var(--nook-font-sans);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--nook-ghost);
+        }
+
+        /* RIGHT: film strip */
+        .nook-story-page .ch2-right {
+            flex: 1;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Cream fade overlays top and bottom of right panel */
+        .ch2-strip-fade-top,
+        .ch2-strip-fade-bottom {
+            position: absolute;
+            left: 0; right: 0;
+            height: 100px;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .ch2-strip-fade-top    { top: 0;    background: linear-gradient(to bottom, var(--nook-cream-warm), transparent); }
+        .ch2-strip-fade-bottom { bottom: 0; background: linear-gradient(to top,    var(--nook-cream-warm), transparent); }
+
+        /* Scroll position track */
+        .ch2-strip-track {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 70px;
+            width: 1px;
+            background: var(--nook-ghost);
+            z-index: 4;
+        }
+
+        .ch2-strip-thumb {
+            width: 100%;
+            background: var(--nook-terracotta);
+            position: absolute;
+            top: 0;
+        }
+
+
+        .ch2-frame-caption.light-bg {
+            color: var(--nook-caption);
+        }
+
+        /* Placeholder image treatments */
+        .ch2-ph {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+        }
+
+        .ch2-ph-lbl {
+            font-family: var(--nook-font-sans);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.4);
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .ch2-ph-sub {
+            font-family: var(--nook-font-sans);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: rgba(255,255,255,0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .ch2-ph-founding { background: linear-gradient(145deg, #3d2a14 0%, #6b4420 50%, #8b5e2a 100%); }
+        .ch2-ph-product  { background: #ede6d9; }
+        .ch2-ph-product .ch2-ph-lbl { color: var(--nook-caption); }
+        .ch2-ph-product .ch2-ph-sub { color: #c0b0a0; }
+        .ch2-ph-product img {
+            width: 52%;
+            height: auto;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+        }
+        .ch2-ph-artisan  { background: linear-gradient(160deg, #2e1e0e 0%, #5c3c20 55%, #7a5434 100%); }
+        .ch2-ph-texture  {
+            background-color: #7a6040;
+            background-image:
+                repeating-linear-gradient(0deg,   transparent, transparent 5px, rgba(0,0,0,0.2)  5px, rgba(0,0,0,0.2)  6px),
+                repeating-linear-gradient(90deg,  transparent, transparent 4px, rgba(0,0,0,0.14) 4px, rgba(0,0,0,0.14) 5px);
+        }
+        .ch2-ph-ethics   { background: linear-gradient(170deg, #2a1e14 0%, #4a3222 50%, #6a4a34 100%); }
+
+        .ch2-weave-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.18;
+        }
+
+        /* Full-height single scroll image */
+        .ch2-full-scroll-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            will-change: transform;
+        }
+
+        /* ============================================
+           CH2 → CH3 TRANSITION BREATH
+           ============================================ */
+        .nook-chapter-breath {
+            width: 100%;
+            background: var(--nook-cream-warm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 14vh 0 12vh;
+            gap: 0;
+        }
+
+        .nook-breath-rule {
+            width: 1px;
+            height: 60px;
+            background: #d8cfc4;
+            margin-bottom: 32px;
+        }
+
+        .nook-breath-label {
+            font-family: var(--nook-font-sans);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: #c8a882;
+        }
+
+        /* ============================================
+           CH3 → CH4 COLD TYPE MARKER
+           ============================================ */
+        .nook-descent-zone {
+            height: 115vh;
+            background: linear-gradient(
+                to bottom,
+                var(--nook-cream)  0%,
+                var(--nook-cream)  12%,
+                #F5F4EF            28%,
+                #EEEDE8            40%,
+                #E8E8E4            52%,
+                #EEEDE8            64%,
+                #F5F4EF            78%,
+                var(--nook-cream)  92%,
+                var(--nook-cream)  100%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .nook-descent-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none;
+            user-select: none;
+            gap: 0;
+            width: 400px;
+            max-width: 90vw;
+        }
+
+        /* "CHAPTER FOUR" supertitle — word-by-word fade */
+        .nook-ch4-marker__super {
+            font-family: var(--nook-font-sans);
+            font-size: 10px;
+            font-weight: 300;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: var(--nook-tan);
+            margin-bottom: 14px;
+            display: flex;
+            gap: 0.5em;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nook-ch4-super-word {
+            opacity: 0;
+            display: inline-block;
+        }
+
+        /* "THE DESCENT" — character-by-character type-on */
+        .nook-ch4-marker__title {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--nook-charcoal);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: baseline;
+            white-space: nowrap;
+            justify-content: center;
+        }
+
+        .nook-ch4-title-char {
+            opacity: 0;
+            display: inline-block;
+        }
+
+        .nook-ch4-title-char--space {
+            width: 0.4em;
+        }
+
+        /* Thin unbroken rule */
+        .nook-ch4-rule-wrap {
+            width: 120px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .nook-ch4-rule-line {
+            height: 1px;
+            width: 0;
+            background: var(--nook-charcoal);
+            opacity: 0.3;
+        }
+
+        /* ============================================
+           SECTION 3 — THE SUMMIT & THE SHADOW
+           ============================================ */
+        .nook-section-3 {
+            width: 100%;
+            background: var(--nook-cream-warm);
+        }
+
+        /* Part A: Victory Display */
+        .nook-summit-victory {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10vh 80px;
+        }
+
+        .nook-summit-grid {
+            display: grid;
+            grid-template-columns: minmax(320px, 1fr) 20px 1.4fr 20px minmax(320px, 1fr);
+            column-gap: 2.5rem;
+            max-width: 1200px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .nook-col-divider {
+            height: 624px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .nook-summit-metric {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .nook-metric-number {
+            font-family: Georgia, serif;
+            font-weight: 700;
+            font-size: clamp(52px, 7vw, 96px);
+            line-height: 1.05;
+            color: var(--nook-text-charcoal);
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            opacity: 0;
+        }
+
+        .nook-metric-caption {
+            font-family: var(--nook-font-sans);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--nook-text-light);
+            line-height: 1.6;
+            opacity: 0;
+        }
+
+        .nook-metric-rating {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .nook-rating-number {
+            font-family: Georgia, serif;
+            font-weight: 700;
+            font-size: clamp(40px, 5.5vw, 72px);
+            line-height: 1.05;
+            color: var(--nook-text-charcoal);
+            letter-spacing: -0.03em;
+            opacity: 0;
+        }
+
+        .nook-rating-stars {
+            display: flex;
+            gap: 3px;
+        }
+
+        .nook-rating-stars .star {
+            font-size: 22px;
+            color: #ddd4c8;
+            transition: color 0.3s ease;
+        }
+
+        /* Center column photos */
+        .nook-summit-photos {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nook-summit-photo-wrap {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .nook-summit-photo {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            filter: saturate(1.05);
+            opacity: 0;
+        }
+
+        /* Photo placeholders */
+        .nook-summit-photo-ph {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+            opacity: 0;
+        }
+
+        .nook-summit-photo-ph:nth-child(1) { background: #d4c4b0; }
+        .nook-summit-photo-ph:nth-child(2) { background: #c8b89a; }
+        .nook-summit-photo-ph:nth-child(3) { background: #bca882; }
+
+        .nook-ph-label {
+            font-family: var(--nook-font-sans);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: rgba(255,255,255,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .nook-summit-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .nook-chapter-breath {
+                padding: 10vh 0 8vh;
+            }
+        }
+
+        /* ============================================
+           CH3 INTRO — TRIPTYCH + PAPER AIRPLANE
+           ============================================ */
+        .nook-ch3-intro {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 24vh 80px 0;
+            overflow: visible;
+            background: var(--nook-cream-warm);
+        }
+
+        .nook-triptych-line {
+            font-family: Georgia, serif;
+            font-size: clamp(26px, 3.2vw, 42px);
+            font-weight: 400;
+            line-height: 1.4;
+            color: var(--nook-text-charcoal);
+            text-align: center;
+            margin: 0 0 14px 0;
+            opacity: 0;
+            transform: translateY(8px);
+            position: relative;
+            z-index: 2;
+        }
+
+        .nook-triptych-line:last-of-type {
+            font-style: italic;
+            font-size: clamp(28px, 3.5vw, 46px);
+            margin-bottom: 0;
+        }
+
+        /* "launched" starts terracotta, transitions to charcoal via JS */
+        .nook-tri-launched {
+            color: var(--nook-terracotta);
+        }
+
+        /* Plane wrapper — absolutely positioned, flies across section */
+        .nook-plane-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 3;
+            will-change: transform;
+        }
+
+        .nook-paper-plane {
+            width: 130px;
+            height: auto;
+            display: block;
+            /* removes white image background on cream bg */
+            mix-blend-mode: multiply;
+        }
+
+        /* Trail canvas — sits behind text and plane */
+        #nook-plane-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .nook-ch3-intro {
+                padding: 18vh 40px 0;
+            }
+
+            .nook-paper-plane {
+                width: 90px;
+            }
+        }
+
+        /* ============================================
+           CH3 VICTORY — TICKER (LEFT COLUMN)
+           ============================================ */
+        .nook-ticker-context {
+            font-family: var(--nook-font-sans);
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: var(--nook-ghost);
+            margin-bottom: 10px;
+            opacity: 0;
+        }
+
+        .nook-ticker-display {
+            font-family: var(--nook-font-serif);
+            font-weight: 700;
+            font-size: clamp(64px, 8vw, 100px);
+            line-height: 1.0;
+            color: var(--nook-text-charcoal);
+            letter-spacing: -0.04em;
+            min-width: 5ch;
+            text-align: center;
+            transition: color 0.5s ease;
+            opacity: 0;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .nook-ticker-display.landed { color: var(--nook-terracotta); }
+
+        .nook-ticker-badge {
+            font-family: var(--nook-font-sans);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: var(--nook-terracotta);
+            margin-top: 6px;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .nook-ticker-badge.show { opacity: 1; transform: translateY(0); }
+
+        .nook-summit-mini-ladder {
+            display: flex;
+            gap: 5px;
+            align-items: flex-end;
+            height: 28px;
+            margin-top: 18px;
+            opacity: 0;
+        }
+
+        .nook-summit-mini-bar {
+            width: 9px;
+            border-radius: 1px;
+            background: var(--nook-tan);
+            height: 0;
+            flex-shrink: 0;
+        }
+
+        .nook-summit-mini-bar.is-you { background: var(--nook-terracotta); }
+
+        .nook-metric-whisper {
+            font-family: var(--nook-font-sans);
+            font-size: 10px;
+            color: var(--nook-ghost);
+            letter-spacing: 0.03em;
+            font-style: italic;
+            text-transform: none;
+        }
+
+        /* ============================================
+           CH3 VICTORY — POLAROID DROP (CENTER COLUMN)
+           ============================================ */
+        .nook-photo-outer {
+            width: 100%;
+            will-change: transform;
+        }
+
+        .nook-photo-inner {
+            width: 100%;
+            transform-origin: center center;
+            will-change: transform, opacity;
+            opacity: 0;
+        }
+
+        /* Override nth-child colors (now nested inside .nook-photo-outer) */
+        #nook-pc1 { background: #d4c4b0; }
+        #nook-pc2 { background: #c8b89a; }
+        #nook-pc3 { background: #bca882; }
+
+        /* ============================================
+           CH3 VICTORY — RIGHT COLUMN (REVIEW FRAGMENT)
+           ============================================ */
+        .nook-summit-right {
+            height: 624px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .nook-rc-revenue-block {
+            margin-bottom: 32px;
+        }
+
+        .nook-rc-rating-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Shared large number style (revenue + rating) */
+        .nook-victory-large {
+            font-family: Georgia, serif;
+            font-weight: 700;
+            font-size: clamp(40px, 5.5vw, 68px);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 10px;
+        }
+
+        /* 4.7 rating number — hidden until Phase 2 animates it in */
+        #nook-rc-rat { opacity: 0; }
+
+        /* Split-flap number container */
+        .nook-sf-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Individual split-flap characters */
+        .nook-sf-char {
+            display: inline-block;
+            min-width: 0.58em;
+            text-align: center;
+            opacity: 0;
+        }
+
+        /* Review quote — clip-path start state */
+        .nook-victory-quote {
+            font-family: Georgia, serif;
+            font-size: 13px;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--nook-text-charcoal);
+            max-width: 200px;
+            margin: 0 auto 16px;
+            clip-path: inset(0 0 100% 0);
+            transition: color 1.2s ease;
+        }
+
+        .nook-victory-quote.faded {
+            color: var(--nook-ghost);
+        }
+
+        /* Thin rule under quote */
+        .nook-victory-q-rule {
+            width: 60%;
+            height: 1px;
+            background: rgba(200, 168, 130, 0.4);
+            transform-origin: left center;
+            transform: scaleX(0);
+            margin: 0 auto 20px;
+            opacity: 0;
+        }
+
+        /* Stars row */
+        .nook-victory-stars {
+            display: flex;
+            gap: 3px;
+            justify-content: center;
+            margin-bottom: 12px;
+            opacity: 0;
+        }
+
+        .nook-story-page .v-star {
+            font-size: 20px;
+            color: var(--nook-ghost);
+            transition: color 0.3s ease;
+        }
+
+        .nook-story-page .v-star.lit {
+            color: var(--nook-gold);
+        }
+
+        /* ============================================
+           SECTION 3 — PEAK ZONE
+           Transitional space + summit quote
+           Follows immediately after the Victory Display
+           ============================================ */
+
+        .nook-peak-zone {
+            position: relative;
+        }
+
+        /* The Space: cream opens up to white as you scroll.
+           Padding compresses 80px → 40px to match quote zone. */
+        .nook-peak-space {
+            min-height: 115vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--nook-cream-warm);
+            position: relative;
+        }
+
+        /* Split-fade whisper: two words drift in from opposite sides */
+        .nook-split-whisper {
+            display: flex;
+            align-items: baseline;
+            gap: 28px;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .nook-split-word {
+            font-family: var(--nook-font-sans);
+            font-size: 13px;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.32em;
+            color: #bfb9b0;
+            opacity: 0;
+        }
+
+        .nook-split-dot {
+            font-family: var(--nook-font-sans);
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--nook-tan);
+            opacity: 0;
+            line-height: 1;
+            position: relative;
+            top: -1px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .nook-split-word { opacity: 0.72; }
+            .nook-split-dot  { opacity: 0.62; }
+        }
+
+        /* The Quote: lives on white, dissolves in scroll-driven */
+        .nook-peak-quote {
+            min-height: 100vh;
+            background: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10vh 40px 40vh;
+        }
+
+        .nook-peak-quote-text {
+            font-family: var(--nook-font-serif);
+            font-size: clamp(24px, 2.9vw, 42px);
+            font-weight: 400;
+            line-height: 1.65;
+            color: var(--nook-text-charcoal);
+            text-align: center;
+            max-width: 1140px;
+            width: 100%;
+        }
+
+        /* Word-by-word clip reveal */
+        .nook-word-clip {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: bottom;
+            margin-right: 0.22em;
+        }
+
+        .nook-word-clip:last-child {
+            margin-right: 0;
+        }
+
+        .nook-word-inner {
+            display: inline-block;
+            transform: translateY(110%);
+        }
+
+        .nook-peak-quote-rule {
+            width: 1px;
+            height: 64px;
+            background: #c8a882;
+            margin-top: 52px;
+            opacity: 0;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .nook-word-inner { transform: none !important; }
+            .nook-peak-quote-rule { opacity: 0.7 !important; }
+        }
+
+        /* The Crease — cool gray rule marking the divide */
+        .nook-peak-crease-rule {
+            width: 1px;
+            height: 64px;
+            background: #B8B4AE;
+            margin-top: 32px;
+            opacity: 0.7;
+        }
+
+        .nook-peak-crease-label {
+            font-family: var(--nook-font-sans);
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #d4664a;
+            margin-top: 28px;
+            opacity: 0.5;
+        }
+
+        /* ════════════════════════════════════════════
+           CHAPTER 4 — THE DESCENT
+           ════════════════════════════════════════════ */
+
+        /* LEDGER SECTION */
+        .nook-story-page .ledger-section {
+            position: relative;
+            padding: 10vh 80px 32vh;
+            background: var(--cream);
+        }
+        .ledger-grid-overlay {
+            position: absolute; inset: 0;
+            pointer-events: none;
+            opacity: 0;
+            will-change: opacity;
+        }
+        .ledger-grid-overlay svg {
+            width: 100%; height: 100%;
+        }
+        .ledger-grid-overlay line {
+            stroke: rgba(0,0,0,0.16);
+            stroke-width: 1;
+            vector-effect: non-scaling-stroke;
+            filter: drop-shadow(0 0 1px rgba(0,0,0,0.08));
+        }
+        .ledger-grid-overlay line.drawing {
+            stroke: rgba(76,175,80,0.4);
+            filter: drop-shadow(0 0 3px rgba(76,175,80,0.3));
+        }
+        .nook-story-page .ledger-header {
+            display: flex; border-bottom: 1.5px solid rgba(0,0,0,0.18);
+            padding-bottom: 9px; position: relative; z-index: 2;
+        }
+        .ledger-col-head {
+            font-size: 8px; text-transform: uppercase; letter-spacing: 0.18em;
+            color: rgba(90,90,90,0.32); font-family: 'Courier New', monospace;
+        }
+        .ledger-col-head.num { width: 72px; flex-shrink: 0; }
+
+        .nook-story-page .ledger-row {
+            display: flex; align-items: flex-end;
+            border-bottom: 1px solid rgba(0,0,0,0.14);
+            height: 72px; padding-bottom: 9px;
+            position: relative; z-index: 2;
+        }
+        .nook-story-page .ledger-row-num {
+            width: 72px; flex-shrink: 0;
+            font-size: 9px; color: rgba(90,90,90,0.26);
+            font-family: 'Courier New', monospace;
+        }
+        .nook-story-page .ledger-row-text {
+            font-family: 'Courier Prime', 'Courier New', monospace; font-size: 18px;
+            line-height: 1.85; color: var(--light); flex: 1;
+            letter-spacing: 0.01em;
+        }
+        .nook-story-page .ledger-row-text .char {
+            opacity: 0;
+            display: inline;
+        }
+        .nook-story-page .ledger-row-text .char.space {
+            white-space: pre;
+        }
+        .nook-story-page .ledger-row-text .char.typing {
+            color: rgba(76,175,80,0.85);
+            text-shadow: 0 0 8px rgba(76,175,80,0.4);
+        }
+        .nook-story-page .ledger-row.less-life .ledger-row-text { color: var(--charcoal); font-style: italic; font-weight: 700; letter-spacing: 0.005em; }
+        .nook-story-page .ledger-row.less-life .ledger-row-num  { color: rgba(90,90,90,0.1); }
+        .nook-story-page .ledger-row.less-life .ledger-row-text .char.typing {
+            color: rgba(212,102,74,0.9);
+            text-shadow: 0 0 12px rgba(212,102,74,0.5);
+        }
+
+        /* NETWORK SECTION */
+        .nook-story-page .network-section {
+            position: relative;
+            padding: 8vh 0 10vh;
+            overflow: hidden;
+            background: var(--cream);
+        }
+        .network-eyebrow {
+            font-size: 8px; text-transform: uppercase; letter-spacing: 0.22em;
+            color: rgba(159,170,187,0.6); text-align: center; margin-bottom: 40px;
+            opacity: 0;
+        }
+
+        .network-svg {
+            width: 100%; display: block;
+        }
+
+        .net-node-circle {
+            fill: var(--white);
+            stroke: var(--tan);
+            stroke-width: 1.5;
+            opacity: 0;
+        }
+        .net-node-circle.stressed { stroke: #9FAABB; }
+        .net-node-circle.you      { stroke: var(--terra); }
+
+        .net-node-label {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            fill: var(--light);
+            opacity: 0;
+            text-anchor: middle;
+        }
+        .net-node-label.you { fill: var(--terra); }
+
+        .net-cost-label {
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            fill: #7A8FA0;
+            opacity: 0;
+            text-anchor: middle;
+        }
+
+        .net-line {
+            stroke: var(--ghost);
+            stroke-width: 1;
+            fill: none;
+            stroke-dasharray: 600;
+            stroke-dashoffset: 600;
+        }
+        .net-line.chaos {
+            stroke: rgba(159,170,187,0.4);
+            stroke-width: 0.7;
+            stroke-dasharray: 3 4;
+        }
+
+        @keyframes gameOverBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.15; }
+        }
+        .game-over-blink {
+            animation: gameOverBlink 0.4s ease-in-out 4;
+        }
+
+        /* CRISIS TRANSITION */
+        .crisis-transition {
+            min-height: 50vh;
+            background: linear-gradient(to bottom,
+                var(--cream) 0%,
+                #FDFCF7 25%,
+                #FAFAF8 50%,
+                #F8F8F9 75%,
+                var(--white) 100%
+            );
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8vh 80px;
+            position: relative;
+        }
+        .crisis-divider {
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom,
+                rgba(200,168,130,0.3) 0%,
+                rgba(159,170,187,0.2) 50%,
+                rgba(159,170,187,0.1) 100%
+            );
+            margin-bottom: 24px;
+        }
+        .crisis-whisper {
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.28em;
+            color: rgba(159,170,187,0.35);
+            text-align: center;
+        }
+
+        /* THE HINGE */
+        .nook-story-page .hinge-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            padding: 0 80px;
+        }
+        .hinge-text {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-weight: 700;
+            font-size: clamp(34px, 4.2vw, 62px);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: rgba(43,43,43,0.6);
+            text-align: center;
+            opacity: 0;
+        }
+        .hinge-period {
+            color: var(--terra);
+        }
+
+        /* EXCEL BLOW */
+        .nook-story-page .blow-excel {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 80px;
+            background: var(--white);
+        }
+        .blow-excel-text {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: clamp(26px, 3vw, 42px);
+            font-style: italic;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--charcoal);
+            text-align: center;
+            white-space: nowrap;
+            line-height: 1.3;
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        /* THE CELL */
+        .nook-story-page .cell-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+        }
+        .spreadsheet-cell-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            opacity: 0;
+        }
+        .cell-formula-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 320px;
+            background: #ececea;
+            border: 1px solid #d0cecc;
+            border-bottom: none;
+            padding: 7px 14px;
+        }
+        .cell-fx {
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: #999;
+            font-style: italic;
+        }
+        .cell-expr {
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: #555;
+        }
+        .spreadsheet-cell {
+            width: 320px;
+            height: 96px;
+            border: 2px solid #4CAF50;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.12s ease, background 0.3s ease, box-shadow 0.15s ease;
+        }
+        .spreadsheet-cell.error {
+            border-color: #D32F2F;
+            background: rgba(211,47,47,0.04);
+            box-shadow: 0 0 0 5px rgba(211,47,47,0.07);
+            animation: cell-shake 0.38s ease;
+        }
+        @keyframes cell-shake {
+            0%,100% { transform: translateX(0); }
+            20%     { transform: translateX(-5px); }
+            40%     { transform: translateX(5px); }
+            60%     { transform: translateX(-3px); }
+            80%     { transform: translateX(2px); }
+        }
+        .cell-value {
+            font-family: Georgia, serif;
+            font-size: 38px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--charcoal);
+            transition: color 0.3s ease;
+        }
+        .spreadsheet-cell.error .cell-value {
+            color: #D32F2F;
+        }
+        .cell-caption {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(90,90,90,0.65);
+            font-family: 'Courier New', monospace;
+            margin-top: 20px;
+            opacity: 0;
+        }
+
+        /* CONCLUSION — compression + disappearance */
+        .nook-story-page .conclusion-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12vh 80px;
+            background: var(--white);
+            position: relative;
+        }
+        .conclusion-text-container {
+            max-width: 720px;
+            width: 100%;
+            transition: none;
+        }
+        .conclusion-para {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(18px, 2vw, 24px);
+            line-height: 1.9;
+            color: var(--light);
+            margin-bottom: 28px;
+            opacity: 0;
+        }
+        .conclusion-para:last-child {
+            margin-bottom: 0;
+            font-style: italic;
+            color: rgba(90,90,90,0.75);
+        }
+
+        /* ════════════════════════════════════════════
+           CHAPTER 5 — THE EQUATION REWRITE
+           ════════════════════════════════════════════ */
+
+        /* CH4 → CH5 TRANSITION — THE BREATH */
+        .ch5-transition {
+            position: relative;
+            width: 100%;
+            min-height: 80vh;
+            background: linear-gradient(to bottom,
+                var(--white) 0%,
+                #f0f0f0 15%,
+                #c0c0c0 35%,
+                #808080 55%,
+                #404040 75%,
+                #1a1a1a 90%,
+                #0a0a0a 100%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* SVG bloom — sits behind everything */
+        .nook-breath-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Label wrap — sits above SVG */
+        .nook-breath-label-wrap {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        /* Eyebrow: "CHAPTER FIVE ·" */
+        .nook-breath-eyebrow {
+            display: block;
+            font-family: var(--nook-font-sans);
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.30em;
+            color: rgba(200, 168, 130, 1);
+            margin-bottom: 14px;
+            opacity: 0;
+        }
+
+        /* "Acceptance" */
+        .nook-breath-word {
+            display: block;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(18px, 2.2vw, 28px);
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            color: rgba(201, 168, 106, 0.88);
+            line-height: 1;
+            opacity: 0;
+        }
+
+        /* Thin horizontal rules */
+        .nook-breath-lines {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 22px;
+            opacity: 0;
+        }
+
+        .nook-breath-rule-left,
+        .nook-breath-rule-right {
+            height: 1px;
+            width: 0;
+            background: linear-gradient(
+                to left,
+                transparent 0%,
+                rgba(201, 168, 106, 0.30) 100%
+            );
+        }
+
+        .nook-breath-rule-right {
+            background: linear-gradient(
+                to right,
+                transparent 0%,
+                rgba(201, 168, 106, 0.30) 100%
+            );
+        }
+
+        /* TERMINAL SECTION */
+        .nook-story-page .terminal-section {
+            min-height: 300vh;
+            background: linear-gradient(to bottom,
+                var(--white) 0%,
+                #1a1a1a 10%,
+                #0a0a0a 20%,
+                #0a0a0a 100%
+            );
+            padding: 0;
+            position: relative;
+        }
+
+        .terminal-stage {
+            position: sticky;
+            top: 8vh;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+
+        .nook-story-page .terminal-window {
+            background: #0a0a0a;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(76, 175, 80, 0.15);
+        }
+
+        .terminal-header {
+            background: #1a1a1a;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(76, 175, 80, 0.3);
+        }
+
+        .terminal-title {
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: rgba(76, 175, 80, 0.7);
+            margin-left: 12px;
+        }
+
+        .nook-story-page .terminal-body {
+            padding: 40px 32px;
+            min-height: 500px;
+        }
+
+        .terminal-line {
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            line-height: 2.2;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .terminal-prompt {
+            color: rgba(76, 175, 80, 0.6);
+            margin-right: 8px;
+        }
+
+        .terminal-text {
+            color: var(--terminal-green);
+            text-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+        }
+
+        /* Equation states */
+        .eq-old {
+            opacity: 1;
+            will-change: opacity;
+        }
+
+        .eq-arrow {
+            display: inline-block;
+            color: rgba(201, 168, 106, 0.6);
+            margin: 0 12px;
+            opacity: 0;
+        }
+
+        .eq-new {
+            opacity: 0;
+            will-change: opacity;
+        }
+
+        /* Cursor — opacity controlled entirely by ScrollTrigger JS (inline style) */
+        .nook-story-page .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 24px;
+            background: var(--terminal-green);
+            margin-left: 4px;
+            vertical-align: middle;
+            opacity: 0;
+        }
+
+        /* Font morphing classes */
+        .nook-story-page .morph-serif {
+            font-family: Georgia, serif;
+            color: var(--amber-warm);
+            text-shadow: 0 0 12px rgba(201, 168, 106, 0.3);
+        }
+
+        /* Final equation - special styling */
+        .final-equation {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(201, 168, 106, 0.2);
+            font-size: 24px;
+            text-align: center;
+        }
+
+        /* Comment lines */
+        .terminal-comment {
+            color: rgba(76, 175, 80, 0.4);
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 24px;
+            opacity: 0;
+        }
+
+        /* CLOSING GRADIENT TRANSITION — dark to light, no text here */
+        .nook-story-page .closing-section {
+            min-height: 130vh;
+            background: linear-gradient(to bottom,
+                #0a0a0a 0%,
+                #1a1410 18%,
+                #2e2018 32%,
+                #5a3d28 48%,
+                #9e7a55 62%,
+                #d4b896 76%,
+                #ebe8dc 88%,
+                #FFFEF9 100%
+            );
+        }
+
+        /* CLOSING LIGHT SECTION — fully in the light, text lives here */
+        .closing-light-section {
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14vh 80px 16vh;
+        }
+
+        .closing-text {
+            max-width: 820px;
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 20px;
+            line-height: 1.95;
+            color: var(--charcoal);
+        }
+
+        .closing-text p {
+            margin-bottom: 32px;
+            opacity: 0;
+        }
+
+        .closing-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .closing-highlight {
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        /* Decorative rule before P3 */
+        .closing-engraving-rule-wrap {
+            margin-top: 48px;
+            margin-bottom: 48px;
+            overflow: visible;
+            opacity: 0;
+        }
+
+        .closing-engraving-rule-svg {
+            display: block;
+            width: 100%;
+            max-width: 320px;
+            height: 18px;
+            overflow: visible;
+        }
+
+        /* P3 climax phrase — warms to terracotta during emergence */
+        .closing-climax-phrase {
+            font-style: italic;
+            color: var(--charcoal);
+        }
+
+        .scroll-spacer {
+            height: 100vh;
+            background: var(--cream);
+        }
+
+        /* ============================================
+           ENDING — Dark bridge + door wipe onto mat photo
+           ============================================ */
+        .nook-dark-bridge {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(to bottom, #FFFEF9 0%, #18160f 100%);
+        }
+
+        .nook-ending-door {
+            position: relative;
+            width: 100%;
+            background: #18160f;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nook-door-stage {
+            position: relative;
+            width: 100%;
+            height: 640px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .nook-door-light {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            clip-path: inset(0 100% 0 0%);
+            overflow: hidden;
+        }
+
+        .nook-door-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 40%;
+            display: block;
+            filter: brightness(0.88);
+        }
+
+        .nook-door-thread-overlay {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        .nook-door-thread-path {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.28);
+            stroke-width: 1;
+            stroke-linecap: round;
+        }
+
+        .nook-door-vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                ellipse at 50% 40%,
+                transparent 40%,
+                rgba(18, 16, 14, 0.55) 100%
+            );
+            pointer-events: none;
+        }
+
+        .nook-door-frame-lines {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0;
+        }
+
+        .nook-door-dot-row-wrap {
+            width: 100%;
+            background: #18160f;
+            padding: 48px 80px 0;
+            opacity: 0;
+        }
+
+        .nook-door-dot-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .nook-door-journey-dot {
+            width: 6px;
+            height: 6px;
+            background: #c8a882;
+            border-radius: 50%;
+            opacity: 0;
+            flex-shrink: 0;
+        }
+
+        .nook-door-closing-wrap {
+            width: 100%;
+            background: #18160f;
+            padding: 36px 40px 100px;
+            text-align: center;
+            opacity: 0;
+        }
+
+        .nook-door-closing-text {
+            font-family: Georgia, serif;
+            font-size: 12px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(200, 168, 130, 0.55);
+            line-height: 2;
+        }
+
+        .nook-door-closing-period {
+            color: #d4664a;
+            opacity: 0.7;
+        }
+
+        /* ============================================
+           MOBILE BREAKPOINTS
+           ============================================ */
+
+        /* Brand logo — prevent wrapping at small viewports */
+        @media (max-width: 600px) {
+            .nook-brand-logo__nook {
+                font-size: 44px;
+            }
+            .nook-brand-logo__mats {
+                font-size: 28px;
+            }
+        }
+
+        /* Ch2 split-screen — stack vertically on mobile */
+        @media (max-width: 768px) {
+            .nook-story-page .ch2-stage {
+                flex-direction: column;
+                height: auto;
+            }
+            .nook-story-page .ch2-left {
+                width: 100%;
+                height: auto;
+                min-height: 0;
+                border-right: none;
+                border-bottom: 1px solid #e4ddd4;
+            }
+            /* Show only the first state statically on mobile */
+            .ch2-left-state.is-first {
+                position: relative;
+                inset: auto;
+                opacity: 1 !important;
+                pointer-events: auto !important;
+                padding: 48px 24px 56px;
+            }
+            .ch2-left-state:not(.is-first) {
+                display: none;
+            }
+            /* Hide scroll nav elements that only make sense in the pinned layout */
+            .ch2-state-counter,
+            .ch2-scroll-hint,
+            .ch2-strip-track {
+                display: none;
+            }
+            .nook-story-page .ch2-right {
+                width: 100%;
+                height: 60vw;
+            }
+            .ch2-full-scroll-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transform: none !important;
+            }
+        }
+
+        /* Terminal — reduce padding on mobile so content fits */
+        @media (max-width: 768px) {
+            .terminal-stage {
+                padding: 0 16px;
+            }
+            .terminal-line {
+                font-size: 13px;
+                line-height: 1.9;
+            }
+        }
+
+    </style>
+</head>
+<body class="nook-story-page">
+
+  <!-- SVG blur filter for closing P3 emergence -->
+  <svg width="0" height="0" style="position:absolute; overflow:hidden;" aria-hidden="true">
+    <defs>
+      <filter id="nook-closing-blur-p3" x="-10%" y="-10%" width="120%" height="120%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="18" result="blurred"/>
+      </filter>
+    </defs>
+  </svg>
+
+    <!-- CHAPTER TRANSITION HEADER -->
+    <div class="nook-chapter-transition" id="transitionSection">
+
+        <!-- LEFT: Wavy Textile Pattern -->
+        <div class="nook-textile-pattern" id="textilePattern">
+            <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Column 1 -->
+                <path d="M 15,20 Q 10,35 15,50 Q 20,65 15,80 Q 10,95 15,110 Q 20,125 15,140"
+                      stroke="#c8a882" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+                <!-- Column 2 -->
+                <path d="M 35,10 Q 30,25 35,40 Q 40,55 35,70 Q 30,85 35,100 Q 40,115 35,130 Q 30,145 35,160"
+                      stroke="#c8a882" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+                <!-- Column 3 -->
+                <path d="M 55,30 Q 50,45 55,60 Q 60,75 55,90 Q 50,105 55,120"
+                      stroke="#c8a882" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+                <!-- Column 4 -->
+                <path d="M 75,5 Q 70,20 75,35 Q 80,50 75,65 Q 70,80 75,95 Q 80,110 75,125 Q 70,140 75,155 Q 80,170 75,185"
+                      stroke="#c8a882" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+                <!-- Column 5 -->
+                <path d="M 95,25 Q 90,40 95,55 Q 100,70 95,85 Q 90,100 95,115 Q 100,130 95,145"
+                      stroke="#c8a882" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+                <!-- Column 6 -->
+                <path d="M 115,15 Q 110,30 115,45 Q 120,60 115,75 Q 110,90 115,105 Q 120,120 115,135 Q 110,150 115,165"
+                      stroke="#c8a882" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+                <!-- Column 7 -->
+                <path d="M 135,35 Q 130,50 135,65 Q 140,80 135,95 Q 130,110 135,125 Q 140,140 135,155"
+                      stroke="#c8a882" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+                <!-- Column 8 -->
+                <path d="M 155,10 Q 150,25 155,40 Q 160,55 155,70 Q 150,85 155,100 Q 160,115 155,130"
+                      stroke="#c8a882" stroke-width="8" fill="none" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <!-- CENTER: Nook Nook Mats Brand Logo -->
+        <div class="nook-brand-logo" id="brandLogo" role="heading" aria-level="1" aria-label="Nook Nook Mats">
+            <div class="nook-brand-logo__main">
+                <span class="nook-brand-logo__nook" id="nook1"></span>
+                <div class="nook-brand-logo__dot" id="dot"></div>
+                <span class="nook-brand-logo__nook" id="nook2"></span>
+            </div>
+            <span class="nook-brand-logo__mats" id="mats"></span>
+        </div>
+
+        <!-- RIGHT: Organic Orange Blob -->
+        <div class="nook-organic-shape" id="organicShape">
+            <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 110,20
+                         Q 150,25 170,50
+                         Q 195,80 190,110
+                         Q 185,145 160,170
+                         Q 130,195 95,185
+                         Q 60,175 40,150
+                         Q 20,120 30,85
+                         Q 40,50 75,30
+                         Q 90,20 110,20 Z"
+                      fill="#d4664a"
+                      opacity="0.85"/>
+            </svg>
+        </div>
+
+    </div>
+
+    <!-- DOT SEPARATOR ROW -->
+    <div class="nook-dot-separator">
+        <div class="nook-dot-row" id="dotRow">
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+            <div class="nook-journey-dot"></div>
+        </div>
+    </div>
+
+    <!-- SECTION 1: THE OPENING DUALITY -->
+    <section class="nook-section-1">
+
+        <!-- Opening text — Chapter 1 -->
+        <div class="nook-product-reveal">
+            <p class="nook-opening-text" id="nook-opening-text">I founded Nook Nook Industries because I believed too many of us waste decades on careers that cost more than they're worth—trading finite, fleeting time for the promise of someday. I didn't want to defer traveling the world until retirement, or wait to truly live only to receive a terminal diagnosis and understand, too late, the futility of postponement.</p>
+        </div>
+
+    </section>
+
+    <!-- THRESHOLD IMAGE — end of Section 1 -->
+    <div class="nook-threshold-section">
+        <div class="nook-threshold-container" id="nookThresholdContainer">
+            <img
+                class="nook-threshold-img"
+                id="nookThresholdImg"
+                src="nook nook wide.jpg"
+                alt="A Nook Nook mat at the front door"
+            />
+            <div class="nook-threshold-vignette"></div>
+        </div>
+    </div>
+
+    <!-- CHAPTER BREAK — breathing room between Chapter 1 photo and Chapter 2 -->
+    <div class="nook-chapter-break"></div>
+
+    <!-- CHAPTER 2 — HYBRID CONCEPT (pinned split: left paragraph, right film strip) -->
+    <div id="ch2-pin-wrapper">
+        <div class="ch2-stage" id="ch2-stage">
+
+            <!-- LEFT: Full paragraph with cycling highlighted phrases -->
+            <div class="ch2-left">
+
+                <!-- State 0: founding / the scope -->
+                <div class="ch2-left-state is-first" id="ch2-ls-0">
+                    <div class="ch2-chapter-label" role="heading" aria-level="2">Chapter Two · The Idea</div>
+                    <p class="ch2-opening-para">What began as a simple idea evolved into <mark>a frothy milkshake of life lessons, risky bets, frames of glory, ice cold failures, and six years of my life.</mark> The concept was straightforward: your doormat didn't have to be ugly, wasteful, or made in exploitative conditions. Inspired by traditional Indian craftsmanship, I designed coconut coir doormats that were hand-woven by artisans near Kochi. Each mat was made from organic, biodegradable coconut fiber and printed with water-based ink. I partnered with suppliers who prioritized fair wages, women's employment, and the preservation of hand-loom techniques against the tide of mass production.</p>
+                </div>
+
+                <!-- State 1: the mission -->
+                <div class="ch2-left-state" id="ch2-ls-1">
+                    <div class="ch2-chapter-label" role="heading" aria-level="2">Chapter Two · The Mission</div>
+                    <p class="ch2-opening-para">What began as a simple idea evolved into a frothy milkshake of life lessons, risky bets, frames of glory, ice cold failures, and six years of my life. The concept was straightforward: <mark>your doormat didn't have to be ugly, wasteful, or made in exploitative conditions.</mark> Inspired by traditional Indian craftsmanship, I designed coconut coir doormats that were hand-woven by artisans near Kochi. Each mat was made from organic, biodegradable coconut fiber and printed with water-based ink. I partnered with suppliers who prioritized fair wages, women's employment, and the preservation of hand-loom techniques against the tide of mass production.</p>
+                </div>
+
+                <!-- State 2: the craft -->
+                <div class="ch2-left-state" id="ch2-ls-2">
+                    <div class="ch2-chapter-label" role="heading" aria-level="2">Chapter Two · The Craft</div>
+                    <p class="ch2-opening-para">What began as a simple idea evolved into a frothy milkshake of life lessons, risky bets, frames of glory, ice cold failures, and six years of my life. The concept was straightforward: your doormat didn't have to be ugly, wasteful, or made in exploitative conditions. Inspired by traditional Indian craftsmanship, I designed coconut coir doormats that were <mark>hand-woven by artisans near Kochi.</mark> Each mat was made from organic, biodegradable coconut fiber and printed with water-based ink. I partnered with suppliers who prioritized fair wages, women's employment, and the preservation of hand-loom techniques against the tide of mass production.</p>
+                </div>
+
+                <!-- State 3: the material -->
+                <div class="ch2-left-state" id="ch2-ls-3">
+                    <div class="ch2-chapter-label" role="heading" aria-level="2">Chapter Two · The Material</div>
+                    <p class="ch2-opening-para">What began as a simple idea evolved into a frothy milkshake of life lessons, risky bets, frames of glory, ice cold failures, and six years of my life. The concept was straightforward: your doormat didn't have to be ugly, wasteful, or made in exploitative conditions. Inspired by traditional Indian craftsmanship, I designed coconut coir doormats that were hand-woven by artisans near Kochi. Each mat was made from <mark>organic, biodegradable coconut fiber and printed with water-based ink.</mark> I partnered with suppliers who prioritized fair wages, women's employment, and the preservation of hand-loom techniques against the tide of mass production.</p>
+                </div>
+
+                <!-- State 4: the ethics -->
+                <div class="ch2-left-state" id="ch2-ls-4">
+                    <div class="ch2-chapter-label" role="heading" aria-level="2">Chapter Two · The Ethics</div>
+                    <p class="ch2-opening-para">What began as a simple idea evolved into a frothy milkshake of life lessons, risky bets, frames of glory, ice cold failures, and six years of my life. The concept was straightforward: your doormat didn't have to be ugly, wasteful, or made in exploitative conditions. Inspired by traditional Indian craftsmanship, I designed coconut coir doormats that were hand-woven by artisans near Kochi. Each mat was made from organic, biodegradable coconut fiber and printed with water-based ink. I partnered with suppliers who prioritized <mark>fair wages, women's employment, and the preservation of hand-loom techniques against the tide of mass production.</mark></p>
+                </div>
+
+                <!-- State counter -->
+                <div class="ch2-state-counter">
+                    <div class="ch2-sc-dots" id="ch2-sc-dots">
+                        <div class="ch2-sc-dot on"></div>
+                        <div class="ch2-sc-dot"></div>
+                        <div class="ch2-sc-dot"></div>
+                        <div class="ch2-sc-dot"></div>
+                        <div class="ch2-sc-dot"></div>
+                    </div>
+                    <span class="ch2-sc-label" id="ch2-sc-label">1 of 5</span>
+                </div>
+
+                <div class="ch2-scroll-hint">scroll ↓</div>
+            </div>
+
+            <!-- RIGHT: Film strip — continuous upward drift -->
+            <div class="ch2-right">
+
+                <div class="ch2-strip-fade-top"></div>
+
+                <img
+                    id="ch2-scroll-img"
+                    class="ch2-full-scroll-img"
+                    src="chapter2 full film scroll.png"
+                    alt="Nook Nook Industries — the full story"
+                />
+
+                <div class="ch2-strip-fade-bottom"></div>
+
+                <div class="ch2-strip-track">
+                    <div id="ch2-strip-thumb" class="ch2-strip-thumb" style="height:12.5%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CH2 → CH3 TRANSITION BREATH -->
+    <div class="nook-chapter-breath">
+        <div class="nook-breath-rule"></div>
+    </div>
+
+    <!-- SECTION 3 — THE SUMMIT & THE SHADOW -->
+    <section class="nook-section-3">
+
+        <!-- CH3 Intro: Triptych + Paper Airplane -->
+        <div class="nook-ch3-intro" id="nook-ch3-intro">
+            <canvas id="nook-plane-canvas"></canvas>
+            <p class="nook-triptych-line" id="nook-tri-1">The product was beautiful.</p>
+            <p class="nook-triptych-line" id="nook-tri-2">The ethics were sound.</p>
+            <p class="nook-triptych-line" id="nook-tri-3">The paper airplane was <span class="nook-tri-launched" id="nook-tri-launched">launched.</span></p>
+            <div class="nook-plane-wrap" id="nook-plane-wrap">
+                <img class="nook-paper-plane" id="nookPlane" src="paper airplane.png" alt="">
+            </div>
+        </div>
+
+        <!-- Part A: Victory Display -->
+        <div class="nook-summit-victory">
+            <div class="nook-summit-grid">
+
+                <!-- Left: Rank Ticker + Mini Bars -->
+                <div class="nook-summit-metric">
+                    <div class="nook-ticker-context" id="nook-tick-ctx">Amazon ranking · doormats</div>
+                    <div class="nook-ticker-display" id="nook-tick-num">—</div>
+                    <div class="nook-ticker-badge" id="nook-tick-badge">Top 10</div>
+                    <div class="nook-summit-mini-ladder" id="nook-summit-mini-ladder">
+                        <div class="nook-summit-mini-bar" data-h="28"></div>
+                        <div class="nook-summit-mini-bar" data-h="38"></div>
+                        <div class="nook-summit-mini-bar" data-h="50"></div>
+                        <div class="nook-summit-mini-bar" data-h="58"></div>
+                        <div class="nook-summit-mini-bar" data-h="65"></div>
+                        <div class="nook-summit-mini-bar" data-h="72"></div>
+                        <div class="nook-summit-mini-bar" data-h="79"></div>
+                        <div class="nook-summit-mini-bar" data-h="86"></div>
+                        <div class="nook-summit-mini-bar" data-h="93"></div>
+                        <div class="nook-summit-mini-bar is-you" data-h="100"></div>
+                    </div>
+                    <p class="nook-metric-caption" id="nook-tick-cap" style="margin-top:14px;opacity:0;">Selling doormat on Amazon</p>
+                    <p class="nook-metric-whisper" id="nook-tick-whisp" style="opacity:0;">among 40,000+ listings</p>
+                </div>
+
+                <!-- Divider: Left woven thread -->
+                <div class="nook-col-divider" id="nook-div-left">
+                    <svg width="16" height="624" viewBox="0 0 16 624" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="nook-wt-path"
+                              d="M 8,0 Q 14,52 8,104 Q 2,156 8,208 Q 14,260 8,312 Q 2,364 8,416 Q 14,468 8,520 Q 2,572 8,624"
+                              stroke="#c8a882" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    </svg>
+                </div>
+
+                <!-- Center: Product photos (polaroid drop + parallax) -->
+                <div class="nook-summit-photos" id="nook-summit-photos">
+                    <div class="nook-photo-outer" id="nook-px1">
+                        <img class="nook-summit-photo nook-photo-inner" id="nook-pc1" src="chapter 3 - 1.jpg" alt="Nook Nook doormat in situ">
+                    </div>
+                    <div class="nook-photo-outer" id="nook-px2">
+                        <img class="nook-summit-photo nook-photo-inner" id="nook-pc2" src="chapter 3 - 2.jpg" alt="Nook Nook doormat in situ">
+                    </div>
+                    <div class="nook-photo-outer" id="nook-px3">
+                        <img class="nook-summit-photo nook-photo-inner" id="nook-pc3" src="chapter 3 - 3.jpg" alt="Nook Nook doormat in situ">
+                    </div>
+                </div>
+
+                <!-- Divider: Right woven thread -->
+                <div class="nook-col-divider" id="nook-div-right">
+                    <svg width="16" height="624" viewBox="0 0 16 624" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="nook-wt-path"
+                              d="M 8,0 Q 14,52 8,104 Q 2,156 8,208 Q 14,260 8,312 Q 2,364 8,416 Q 14,468 8,520 Q 2,572 8,624"
+                              stroke="#c8a882" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    </svg>
+                </div>
+
+                <!-- Right: Revenue + Rating (Review Fragment) -->
+                <div class="nook-summit-right" id="nook-summit-right">
+                    <div class="nook-rc-revenue-block">
+                        <div class="nook-victory-large nook-sf-num" id="nook-rc-rev">
+                            <span class="nook-sf-char" id="nook-rc-sc0">$</span>
+                            <span class="nook-sf-char" id="nook-rc-sc1">1</span>
+                            <span class="nook-sf-char" id="nook-rc-sc2">5</span>
+                            <span class="nook-sf-char" id="nook-rc-sc3">0</span>
+                            <span class="nook-sf-char" id="nook-rc-sc4">K</span>
+                            <span class="nook-sf-char" id="nook-rc-sc5">+</span>
+                        </div>
+                        <p class="nook-metric-caption" id="nook-rc-cap-rev">Annual revenue</p>
+                    </div>
+                    <div class="nook-rc-rating-block">
+                        <p class="nook-victory-quote" id="nook-rc-quote">The most beautiful doormat I've ever owned.</p>
+                        <div class="nook-victory-q-rule" id="nook-rc-qrule"></div>
+                        <div class="nook-victory-large" id="nook-rc-rat" style="color: var(--nook-text-charcoal);">4.7</div>
+                        <div class="nook-victory-stars" id="nook-rc-stars">
+                            <span class="v-star">★</span>
+                            <span class="v-star">★</span>
+                            <span class="v-star">★</span>
+                            <span class="v-star">★</span>
+                            <span class="v-star">★</span>
+                        </div>
+                        <p class="nook-metric-caption" id="nook-rc-cap-rat">Customer rating</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         CH3 PEAK ZONE
+         — transitional space + summit quote
+           Space A (Pure White Expansion) + Quote D (Full Width Dissolution)
+         ══════════════════════════════════════════ -->
+
+    <div class="nook-peak-zone">
+
+        <!-- THE SPACE: world opens up, gets brighter -->
+        <div class="nook-peak-space" id="nook-peak-space">
+            <div class="nook-split-whisper" role="heading" aria-level="2" aria-label="Chapter Three · The Summit">
+                <span class="nook-split-word" id="nook-split-left">Chapter Three</span>
+                <span class="nook-split-dot" id="nook-split-dot">·</span>
+                <span class="nook-split-word" id="nook-split-right">The Summit</span>
+            </div>
+        </div>
+
+        <!-- THE QUOTE: materializes out of the whiteness -->
+        <div class="nook-peak-quote" id="nook-peak-quote">
+            <p class="nook-peak-quote-text" id="nook-peak-quote-text" aria-label="Nook Nook climbed to become one of the top ten selling doormats on Amazon despite prices nearly double our competitors'. We achieved consistent six-figure annual revenue and a 4.7-star rating—among the highest customer satisfaction scores in our category.">
+                <!-- Words injected by JS word-by-word reveal -->
+            </p>
+            <div class="nook-peak-quote-rule"></div>
+            <div class="nook-peak-crease-rule"></div>
+        </div>
+
+    </div>
+
+
+    <!-- ══════════════════════════════════════════
+         CH3 → CH4 FRACTURE MARKER
+         ══════════════════════════════════════════ -->
+    <div class="nook-descent-zone" id="nookDescentZone">
+        <div class="nook-descent-marker">
+            <!-- "CHAPTER FOUR" — word-by-word fade -->
+            <div class="nook-ch4-marker__super" role="heading" aria-level="2" aria-label="Chapter Four · The Descent">
+                <span class="nook-ch4-super-word" id="ct-word-0">Chapter</span>
+                <span class="nook-ch4-super-word" id="ct-word-1">Four</span>
+            </div>
+            <!-- "THE DESCENT" — char-by-char type-on, injected by JS -->
+            <div class="nook-ch4-marker__title" id="ct-title-container"></div>
+            <!-- Unbroken rule draws left-to-right -->
+            <div class="nook-ch4-rule-wrap">
+                <div class="nook-ch4-rule-line" id="ct-rule"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════
+         CHAPTER 4 — THE DESCENT
+         ══════════════════════════════════════════ -->
+
+    <!-- LEDGER SECTION -->
+    <div class="ledger-section" id="ledger-section">
+        <div class="ledger-grid-overlay" id="ledger-grid">
+            <svg id="grid-svg"></svg>
+        </div>
+
+        <div class="ledger-header">
+            <span class="ledger-col-head num">Row</span>
+            <span class="ledger-col-head">Chapter Four · The Descent</span>
+        </div>
+
+        <div class="ledger-row" id="lr-1">
+            <span class="ledger-row-num">A1</span>
+            <p class="ledger-row-text">Behind these numbers lived a different story. I worked a full-time job while running the business.</p>
+        </div>
+        <div class="ledger-row" id="lr-2">
+            <span class="ledger-row-num">A2</span>
+            <p class="ledger-row-text">Amazon changed seller policies at will and support for sellers made you want to smash your head through a wall.</p>
+        </div>
+        <div class="ledger-row" id="lr-2b">
+            <span class="ledger-row-num">A3</span>
+            <p class="ledger-row-text">Shipping sabered through my profit margins.</p>
+        </div>
+        <div class="ledger-row" id="lr-3">
+            <span class="ledger-row-num">A4</span>
+            <p class="ledger-row-text">Scaling orders, logistics, and storage without drowning in debt proved nearly impossible.</p>
+        </div>
+        <div class="ledger-row less-life" id="lr-4">
+            <span class="ledger-row-num">A5</span>
+            <p class="ledger-row-text">The venture wasn't moving me toward more life but less of it.</p>
+        </div>
+    </div>
+
+    <!-- NETWORK DIAGRAM -->
+    <div class="network-section" id="network-section">
+        <p class="network-eyebrow" id="net-eyebrow">What it actually took to get a mat to your door</p>
+
+        <svg class="network-svg" id="network-svg" viewBox="0 0 1100 380" xmlns="http://www.w3.org/2000/svg">
+
+            <!-- Connection lines -->
+            <line class="net-line" id="nl-1" x1="90" y1="120" x2="260" y2="190"/>
+            <line class="net-line" id="nl-2" x1="260" y1="190" x2="440" y2="100"/>
+            <line class="net-line" id="nl-3" x1="440" y1="100" x2="620" y2="180"/>
+            <line class="net-line" id="nl-4" x1="620" y1="180" x2="780" y2="100"/>
+            <line class="net-line" id="nl-5" x1="620" y1="180" x2="780" y2="270"/>
+            <line class="net-line" id="nl-6" x1="780" y1="270" x2="960" y2="200"/>
+            <line class="net-line" id="nl-7" x1="960" y1="200" x2="960" y2="310"/>
+            <line class="net-line chaos" id="nl-c1" x1="440" y1="100" x2="780" y2="270"/>
+            <line class="net-line chaos" id="nl-c2" x1="260" y1="190" x2="780" y2="100"/>
+
+            <!-- NODES -->
+            <circle class="net-node-circle" id="nn-1" cx="90" cy="120" r="22"/>
+            <text class="net-node-label" id="nl-lbl-1" x="90" y="152">Factory</text>
+            <text class="net-node-label" id="nl-lbl-1b" x="90" y="163" style="font-size:7px;fill:#9B8B7E;">Kochi, India</text>
+
+            <circle class="net-node-circle stressed" id="nn-2" cx="260" cy="190" r="20"/>
+            <text class="net-node-label" id="nl-lbl-2" x="260" y="220">Freight</text>
+            <text class="net-node-label" id="nl-lbl-2b" x="260" y="231" style="font-size:7px;fill:#9B8B7E;">Agent</text>
+            <text class="net-cost-label" id="nc-2" x="260" y="154">$180/mo</text>
+
+            <circle class="net-node-circle stressed" id="nn-3" cx="440" cy="100" r="24"/>
+            <text class="net-node-label" id="nl-lbl-3" x="440" y="134">Container</text>
+            <text class="net-node-label" id="nl-lbl-3b" x="440" y="145" style="font-size:7px;fill:#9B8B7E;">8,000 mi</text>
+
+            <circle class="net-node-circle stressed" id="nn-4" cx="620" cy="180" r="22"/>
+            <text class="net-node-label" id="nl-lbl-4" x="620" y="212">Port of NJ</text>
+            <text class="net-cost-label" id="nc-4" x="620" y="142">+delays</text>
+
+            <circle class="net-node-circle stressed" id="nn-5" cx="780" cy="100" r="20"/>
+            <text class="net-node-label" id="nl-lbl-5" x="780" y="130">Customs</text>
+            <text class="net-cost-label" id="nc-5" x="780" y="64">$240</text>
+
+            <circle class="net-node-circle stressed" id="nn-6" cx="780" cy="270" r="22"/>
+            <text class="net-node-label" id="nl-lbl-6" x="780" y="302">Warehouse</text>
+            <text class="net-cost-label" id="nc-6" x="780" y="232">$620/mo</text>
+
+            <circle class="net-node-circle stressed" id="nn-7" cx="960" cy="200" r="22"/>
+            <text class="net-node-label" id="nl-lbl-7" x="960" y="232">Amazon FBA</text>
+            <text class="net-cost-label" id="nc-7" x="960" y="162">15% fee</text>
+
+            <circle class="net-node-circle you" id="nn-8" cx="960" cy="310" r="18"/>
+            <text class="net-node-label you" id="nl-lbl-8" x="960" y="338">My apartment</text>
+            <text class="net-node-label you" id="nl-lbl-8b" x="960" y="349" style="font-size:7px;">floor</text>
+            <text class="net-node-label you" id="nl-lbl-8c" x="960" y="360" style="font-size:7px;font-style:italic;">crying</text>
+        </svg>
+    </div>
+
+    <!-- CRISIS TRANSITION ZONE -->
+    <div class="crisis-transition">
+        <div class="crisis-divider"></div>
+        <p class="crisis-whisper">· · ·</p>
+    </div>
+
+    <!-- THE HINGE -->
+    <div class="hinge-section" id="hinge-section">
+        <p class="hinge-text" id="hinge-text">
+            Then came the lows<span class="hinge-period">.</span>
+        </p>
+    </div>
+
+    <!-- BLOW 1: Excel -->
+    <div class="blow-excel" id="blow-excel">
+        <p class="blow-excel-text" id="blow-excel-text">
+            A miscalculation in an Excel spreadsheet.
+        </p>
+    </div>
+
+    <!-- THE CELL -->
+    <div class="cell-section" id="cell-section">
+        <div class="spreadsheet-cell-wrap" id="cell-wrap">
+            <div class="cell-formula-bar">
+                <span class="cell-fx">fx</span>
+                <span class="cell-expr">=LOAN_AMOUNT * 2</span>
+            </div>
+            <div class="spreadsheet-cell" id="the-cell">
+                <div class="cell-value" id="cell-value">$50,000</div>
+            </div>
+        </div>
+        <p class="cell-caption" id="cell-caption">A $50,000 loan about to double that amount in debt</p>
+    </div>
+
+    <!-- CONCLUSION — compression animation -->
+    <div class="conclusion-section" id="conclusion-section">
+        <div class="conclusion-text-container" id="conclusion-container">
+            <p class="conclusion-para" id="cp-1">A $50,000 loan about to double that amount in debt.</p>
+            <p class="conclusion-para" id="cp-2">The floor of my apartment where I sat crying, certain I had ruined everything.</p>
+        </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════
+         CH4 → CH5 TRANSITION — THE BREATH
+         ══════════════════════════════════════════ -->
+    <div class="ch5-transition" id="ch5-transition">
+
+        <!-- SVG radial bloom, animated by GSAP -->
+        <svg class="nook-breath-svg"
+             id="nookBreathSvg"
+             viewBox="0 0 1000 600"
+             preserveAspectRatio="xMidYMid slice"
+             xmlns="http://www.w3.org/2000/svg"
+             aria-hidden="true">
+            <defs>
+                <radialGradient id="nookBreathGrad1"
+                                cx="50%" cy="55%"
+                                r="0%"
+                                fx="50%" fy="55%">
+                    <stop offset="0%"   stop-color="rgba(201,168,106,0.22)"/>
+                    <stop offset="25%"  stop-color="rgba(201,168,106,0.14)"/>
+                    <stop offset="50%"  stop-color="rgba(201,168,106,0.06)"/>
+                    <stop offset="75%"  stop-color="rgba(212,102,74,0.02)"/>
+                    <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                </radialGradient>
+                <radialGradient id="nookBreathGrad2"
+                                cx="50%" cy="52%"
+                                r="0%"
+                                fx="50%" fy="52%">
+                    <stop offset="0%"   stop-color="rgba(201,168,106,0.10)"/>
+                    <stop offset="40%"  stop-color="rgba(201,168,106,0.04)"/>
+                    <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                </radialGradient>
+            </defs>
+            <rect id="nookBloom1" x="0" y="0" width="1000" height="600"
+                  fill="url(#nookBreathGrad1)" opacity="0"/>
+            <rect id="nookBloom2" x="0" y="0" width="1000" height="600"
+                  fill="url(#nookBreathGrad2)" opacity="0"/>
+        </svg>
+
+        <!-- Label -->
+        <div class="nook-breath-label-wrap" role="heading" aria-level="2" aria-label="Chapter Five · Acceptance">
+            <span class="nook-breath-eyebrow" id="nookBreathEyebrow">
+                Chapter Five&nbsp;&nbsp;·
+            </span>
+            <span class="nook-breath-word" id="nookBreathWord">Acceptance</span>
+            <div class="nook-breath-lines" id="nookBreathLines">
+                <div class="nook-breath-rule-left"  id="nookRuleLeft"></div>
+                <div class="nook-breath-rule-right" id="nookRuleRight"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ══════════════════════════════════════════
+         CHAPTER 5 — THE EQUATION REWRITE
+         ══════════════════════════════════════════ -->
+
+    <!-- TERMINAL SECTION -->
+    <div class="terminal-section" id="terminal-section">
+        <div class="terminal-stage">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-dot"></div>
+                    <div class="terminal-dot"></div>
+                    <div class="terminal-dot"></div>
+                    <span class="terminal-title">nook-nook-closure.log</span>
+                </div>
+                <div class="terminal-body" id="terminal-body">
+
+                    <div class="terminal-comment" id="comment-1">
+                        // Six years compressed into formulas
+                    </div>
+
+                    <div class="terminal-line" id="eq-1">
+                        <span class="terminal-prompt">$</span>
+                        <span class="terminal-text eq-old">PROFIT = REVENUE - COSTS</span>
+                        <span class="eq-arrow">→</span>
+                        <span class="terminal-text eq-new">WISDOM = EXPERIENCE - REGRET</span>
+                        <span class="cursor" id="cursor-1"></span>
+                    </div>
+
+                    <div class="terminal-line" id="eq-2">
+                        <span class="terminal-prompt">$</span>
+                        <span class="terminal-text eq-old">SCALE = INVENTORY × VELOCITY</span>
+                        <span class="eq-arrow">→</span>
+                        <span class="terminal-text eq-new">RESILIENCE = FAILURE × REFLECTION</span>
+                        <span class="cursor" id="cursor-2"></span>
+                    </div>
+
+                    <div class="terminal-line" id="eq-3">
+                        <span class="terminal-prompt">$</span>
+                        <span class="terminal-text eq-old">RISK = DEBT / RUNWAY</span>
+                        <span class="eq-arrow">→</span>
+                        <span class="terminal-text eq-new">GRATITUDE = LIFE / AWARENESS</span>
+                        <span class="cursor" id="cursor-3"></span>
+                    </div>
+
+                    <div class="terminal-comment" id="comment-2">
+                        // The final compile
+                    </div>
+
+                    <div class="terminal-line final-equation" id="eq-final">
+                        <span class="terminal-prompt">$</span>
+                        <span class="terminal-text eq-new">ACCEPTANCE = (FAILURE + TRIUMPH) ^ TIME</span>
+                        <span class="cursor" id="cursor-final"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLACK-TO-LIGHT GRADIENT TRANSITION — pure gradient, no text -->
+    <div class="closing-section" id="closing-section"></div>
+
+    <!-- CLOSING LIGHT SECTION — fully in the light, text enters here -->
+    <div class="closing-light-section" id="closing-light-section">
+        <div class="closing-text">
+            <p id="closing-p1">
+                I closed Nook Nook Industries in 2023. The new designs I'd sketched, the expanded website, the additional eco-friendly home goods I'd planned to source, none of it came to pass.
+            </p>
+            <p id="closing-p2">
+                I learned how difficult it is to start, run, and expand a business. I learned about the triad of quality, ethics, and profitability, and how our world works, since manufacturing and trade, behind the scenes, enables our modern convenient life. I learned how to manage time when there never seems to be enough of it.
+            </p>
+            <!-- Decorative rule -->
+            <div class="closing-engraving-rule-wrap" id="closing-engraving-rule">
+                <svg class="closing-engraving-rule-svg" viewBox="0 0 320 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <clipPath id="closing-rule-clip-1"><rect id="closing-rule-rect-1" x="0" y="0" width="0" height="18"/></clipPath>
+                        <clipPath id="closing-rule-clip-2"><rect id="closing-rule-rect-2" x="0" y="0" width="0" height="18"/></clipPath>
+                        <clipPath id="closing-rule-clip-3"><rect id="closing-rule-rect-3" x="0" y="0" width="0" height="18"/></clipPath>
+                    </defs>
+                    <path d="M0 5 C20 2, 40 8, 60 5 C80 2, 100 8, 120 5 C140 2, 160 8, 180 5 C200 2, 220 8, 240 5 C260 2, 280 8, 300 5 C310 3.5, 316 4.5, 320 5" stroke="#c8a882" stroke-width="0.8" stroke-opacity="0.45" clip-path="url(#closing-rule-clip-1)"/>
+                    <path d="M0 9 C20 6, 40 12, 60 9 C80 6, 100 12, 120 9 C140 6, 160 12, 180 9 C200 6, 220 12, 240 9 C260 6, 280 12, 300 9 C310 7.5, 316 8.5, 320 9" stroke="#c8a882" stroke-width="1" stroke-opacity="0.7" clip-path="url(#closing-rule-clip-2)"/>
+                    <path d="M0 13 C20 10, 40 16, 60 13 C80 10, 100 16, 120 13 C140 10, 160 16, 180 13 C200 10, 220 16, 240 13 C260 10, 280 16, 300 13 C310 11.5, 316 12.5, 320 13" stroke="#c8a882" stroke-width="0.8" stroke-opacity="0.45" clip-path="url(#closing-rule-clip-3)"/>
+                </svg>
+            </div>
+
+            <p id="closing-p3" style="filter: url(#nook-closing-blur-p3);">
+                Most importantly, I learned <span class="closing-climax-phrase" id="closing-climax-phrase">resilience, gratitude, and the kind of positivity that can only be forged in the furnace of real failure, real triumph, and real acceptance.</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Dark bridge — cream to near-black, leads into the ending -->
+    <div class="nook-dark-bridge" aria-hidden="true"></div>
+
+    <!-- ══════════════════════════════════════════
+         ENDING: THE DOOR OPENS ONTO THE MAT
+         ══════════════════════════════════════════ -->
+    <section class="nook-ending-door" id="nookEndingDoor"
+             aria-label="Closing visual — a door opening to reveal the Nook Nook mat">
+
+      <!-- The door frame / stage -->
+      <div class="nook-door-stage">
+
+        <!-- The door-shaped opening — interior is the mat photo -->
+        <div class="nook-door-light" id="nookDoorLight">
+
+          <!-- Mat photo fills the door interior -->
+          <img
+            class="nook-door-photo"
+            src="nook nook wide.jpg"
+            alt="A Nook Nook coconut coir doormat resting at a front door threshold in warm natural light"
+          >
+
+          <!-- Thread overlay SVG — drawn in after door opens -->
+          <svg class="nook-door-thread-overlay" id="nookDoorThreadSvg"
+               viewBox="0 0 1000 640" preserveAspectRatio="none"
+               xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path id="nookDoorThread1" class="nook-door-thread-path"
+              d="M 0,55 C 63,40 125,70 188,55 C 250,40 313,70 375,55 C 438,40 500,70 563,55 C 625,40 688,70 750,55 C 813,40 875,70 938,55 L 1000,55"/>
+            <path id="nookDoorThread2" class="nook-door-thread-path"
+              d="M 0,138 C 63,153 125,123 188,138 C 250,153 313,123 375,138 C 438,153 500,123 563,138 C 625,153 688,123 750,138 C 813,153 875,123 938,138 L 1000,138"/>
+            <path id="nookDoorThread3" class="nook-door-thread-path"
+              d="M 0,220 C 63,205 125,235 188,220 C 250,205 313,235 375,220 C 438,205 500,235 563,220 C 625,205 688,235 750,220 C 813,205 875,235 938,220 L 1000,220"/>
+            <path id="nookDoorThread4" class="nook-door-thread-path"
+              d="M 0,302 C 63,317 125,287 188,302 C 250,317 313,287 375,302 C 438,317 500,287 563,302 C 625,317 688,287 750,302 C 813,317 875,287 938,302 L 1000,302"/>
+            <path id="nookDoorThread5" class="nook-door-thread-path"
+              d="M 0,385 C 63,370 125,400 188,385 C 250,370 313,400 375,385 C 438,370 500,400 563,385 C 625,370 688,400 750,385 C 813,370 875,400 938,385 L 1000,385"/>
+            <path id="nookDoorThread6" class="nook-door-thread-path"
+              d="M 0,467 C 63,482 125,452 188,467 C 250,482 313,452 375,467 C 438,482 500,452 563,467 C 625,482 688,452 750,467 C 813,482 875,452 938,467 L 1000,467"/>
+            <path id="nookDoorThread7" class="nook-door-thread-path"
+              d="M 0,550 C 63,535 125,565 188,550 C 250,535 313,565 375,550 C 438,535 500,565 563,550 C 625,535 688,565 750,550 C 813,535 875,565 938,550 L 1000,550"/>
+            <path id="nookDoorThread8" class="nook-door-thread-path"
+              d="M 0,615 C 63,630 125,600 188,615 C 250,630 313,600 375,615 C 438,630 500,600 563,615 C 625,630 688,600 750,615 C 813,630 875,600 938,615 L 1000,615"/>
+          </svg>
+
+          <!-- Corner-darkening vignette -->
+          <div class="nook-door-vignette" aria-hidden="true"></div>
+
+        </div>
+
+        <!-- Frame hairlines placeholder -->
+        <div class="nook-door-frame-lines" id="nookDoorFrameLines" aria-hidden="true"></div>
+
+      </div>
+
+      <!-- 24 faded journey dots -->
+      <div class="nook-door-dot-row-wrap" id="nookDoorDotWrap">
+        <div class="nook-door-dot-row" aria-hidden="true" id="nookDoorDotRow">
+          <!-- 24 dots injected by JS -->
+        </div>
+      </div>
+
+      <!-- Final closing line -->
+      <div class="nook-door-closing-wrap" id="nookDoorClosingWrap">
+        <p class="nook-door-closing-text">
+          Nook Nook Industries &nbsp;&middot;&nbsp; 2017&ndash;2023<span class="nook-door-closing-period">.</span>
+        </p>
+      </div>
+
+    </section>
+
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- GSAP Animations for Section 1 -->
+    <script>
+        // Register ScrollTrigger plugin
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ==================== HEADER ANIMATION ====================
+        let hasAnimatedTransition = false;
+
+        // Brand text fade animation (character by character)
+        function animateText(element, text, delay, charDelay = 150) {
+            element.innerHTML = '';
+
+            // Split text into individual characters
+            text.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                // Set initial invisible state and transition BEFORE appending,
+                // so the browser registers a starting state to transition from.
+                span.style.opacity = '0';
+                span.style.transform = 'translateY(4px)';
+                span.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                element.appendChild(span);
+
+                // Fade in each character
+                setTimeout(() => {
+                    span.style.opacity = '1';
+                    span.style.transform = 'translateY(0)';
+                }, delay + (index * charDelay));
+            });
+        }
+
+        // Trigger transition animation
+        function triggerTransitionAnimation() {
+            if (hasAnimatedTransition) return;
+
+            const textile = document.getElementById('textilePattern');
+            const nook1 = document.getElementById('nook1');
+            const dot = document.getElementById('dot');
+            const nook2 = document.getElementById('nook2');
+            const mats = document.getElementById('mats');
+            const shape = document.getElementById('organicShape');
+
+            // 1. Weave textile lines (starts immediately)
+            setTimeout(() => {
+                textile.classList.add('animate');
+            }, 300);
+
+            // 2. Absorb brand text character by character
+            setTimeout(() => {
+                animateText(nook1, 'nook', 0, 150);
+            }, 1000);
+
+            setTimeout(() => {
+                dot.style.opacity = '1';
+                dot.style.transform = 'scale(1.0)';
+                dot.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            }, 1600);
+
+            setTimeout(() => {
+                animateText(nook2, 'nook', 0, 150);
+            }, 1700);
+
+            setTimeout(() => {
+                mats.style.opacity = '1';
+                mats.style.transform = 'translateY(0)';
+                mats.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            }, 2300);
+
+            // 3. Spin and expand the organic shape
+            setTimeout(() => {
+                shape.classList.add('animate');
+            }, 2500);
+
+            // 4. Dots pop in left-to-right after blob finishes
+            // Blob starts at 2500ms + 1200ms CSS transition = ~3700ms
+            // First dot at 3800ms, each subsequent dot 70ms later
+            const dots = document.querySelectorAll('.nook-journey-dot');
+            dots.forEach((dot, index) => {
+                setTimeout(() => {
+                    dot.classList.add('visible');
+                }, 3800 + (index * 70));
+            });
+
+            hasAnimatedTransition = true;
+        }
+
+        // Transition section observer — disconnect after first fire
+        const transitionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    triggerTransitionAnimation();
+                    transitionObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observe the transition section
+        const transitionSection = document.getElementById('transitionSection');
+        if (transitionSection) {
+            transitionObserver.observe(transitionSection);
+        }
+
+        // Header Background Cross-Fade on Scroll
+        // GSAP cannot interpolate between a gradient and a solid color via the `background`
+        // shorthand — use onUpdate with manual RGB interpolation instead.
+        {
+            const headerEl = document.querySelector('.nook-chapter-transition');
+            ScrollTrigger.create({
+                trigger: headerEl,
+                start: 'bottom 80%',
+                end: 'bottom 50%',
+                scrub: 1,
+                onUpdate(self) {
+                    const p = self.progress;
+                    // Interpolate from gradient endpoint color #f0ebe5 to cream #FFFEF9
+                    const r = Math.round(240 + (255 - 240) * p);
+                    const g = Math.round(235 + (254 - 235) * p);
+                    const b = Math.round(229 + (249 - 229) * p);
+                    headerEl.style.background = `rgb(${r}, ${g}, ${b})`;
+                }
+            });
+        }
+
+        // ==================== SECTION 1: OPENING TEXT FILL ====================
+
+        const OPENING_TEXT = "I founded Nook Nook Industries because I believed too many of us waste decades on careers that cost more than they're worth—trading finite, fleeting time for the promise of someday. I didn't want to defer traveling the world until retirement, or wait to truly live only to receive a terminal diagnosis and understand, too late, the futility of postponement.";
+
+        // Inject word spans
+        const openingEl = document.getElementById('nook-opening-text');
+        openingEl.innerHTML = OPENING_TEXT.split(' ').map(w =>
+            `<span class="nook-opening-word">${w} </span>`
+        ).join('');
+
+        // ==================== THRESHOLD IMAGE PARALLAX ====================
+
+        gsap.fromTo('#nookThresholdImg',
+            { scale: 1.0 },
+            {
+                scale: 1.2,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '#nookThresholdContainer',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 2,
+                    invalidateOnRefresh: true,
+                }
+            }
+        );
+
+        // Set initial Y state so the drift animates in from below
+        gsap.set('.nook-opening-word', { y: 18 });
+
+        // Pin the stage and fill words left-to-right as user scrolls
+        // Dual-track: Y drift leads, color fill follows
+        const openingTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: '.nook-product-reveal',
+                start: 'top top',
+                end: '+=900',
+                pin: true,
+                scrub: 1.5,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+            }
+        });
+
+        // Y drift leads — tighter stagger, decelerates sharply into place
+        openingTl.to('.nook-opening-word', {
+            y: 0,
+            stagger: { each: 0.038 },
+            ease: 'power2.out',
+        }, 0);
+
+        // Color fill follows — slightly wider stagger, softer ease
+        openingTl.to('.nook-opening-word', {
+            color: '#2B2B2B',
+            stagger: { each: 0.055 },
+            ease: 'none',
+        }, 0);
+
+        // ==================== CHAPTER 2 ====================
+
+        // Graduated first sentence: font size steps from large → body size
+        // word-by-word, following the emotional arc of the sentence.
+        (function ch2GraduateFirstSentence() {
+            const START_SIZE = 26;  // px — opening word size
+            const END_SIZE   = 17;  // px — matches body paragraph size
+            const SEPARATOR  = ' The concept was straightforward';
+
+            document.querySelectorAll('#ch2-ls-0 .ch2-opening-para').forEach(para => {
+                const html     = para.innerHTML;
+                const splitIdx = html.indexOf(SEPARATOR);
+                if (splitIdx === -1) return;
+
+                const firstSentHTML = html.substring(0, splitIdx);
+                const restHTML      = html.substring(splitIdx);
+
+                // Parse the first sentence, preserving <mark> boundaries
+                const temp = document.createElement('span');
+                temp.innerHTML = firstSentHTML;
+
+                const words = [];
+                temp.childNodes.forEach(node => {
+                    const tokens = node.textContent.match(/\S+/g);
+                    if (!tokens) return;
+                    const isMarked = node.nodeName === 'MARK';
+                    tokens.forEach(w => words.push({ text: w, marked: isMarked }));
+                });
+
+                if (!words.length) return;
+                const n = words.length;
+
+                let newHTML = '';
+                words.forEach((word, i) => {
+                    // t² easing: size holds large early, drops faster near the end
+                    const t     = i / Math.max(n - 1, 1);
+                    const eased = t * t;
+                    const size  = (START_SIZE - eased * (START_SIZE - END_SIZE)).toFixed(2);
+
+                    // Use a CSS class for marked words so the color/border stays in sync
+                    // with the .ch2-opening-para mark rule rather than being hard-coded here.
+                    const cls = word.marked ? ' class="ch2-graduated-mark"' : '';
+                    newHTML += `<span style="font-size:${size}px;"${cls}>${word.text} </span>`;
+                });
+
+                para.innerHTML = newHTML + `<span class="ch2-body-copy">${restHTML}</span>`;
+            });
+        })();
+
+        // ==================== CH3 INTRO: TRIPTYCH + PAPER AIRPLANE ====================
+        {
+            const ch3Intro  = document.getElementById('nook-ch3-intro');
+            const tri1      = document.getElementById('nook-tri-1');
+            const tri2      = document.getElementById('nook-tri-2');
+            const tri3      = document.getElementById('nook-tri-3');
+            const launched  = document.getElementById('nook-tri-launched');
+            const planeWrap = document.getElementById('nook-plane-wrap');
+            const nookPlane = document.getElementById('nookPlane');
+            const canvas    = document.getElementById('nook-plane-canvas');
+            const ctx       = canvas.getContext('2d');
+
+            let ch3Done = false;
+
+            function startCh3Sequence() {
+                if (ch3Done) return;
+                ch3Done = true;
+
+                const H = ch3Intro.offsetHeight;
+                const W = ch3Intro.offsetWidth;
+
+                // Size canvas to section
+                canvas.width  = W;
+                canvas.height = H;
+
+                // Place plane at starting position — lower-left, off-screen
+                gsap.set(planeWrap, { x: -180, y: H * 0.62 });
+                gsap.set(nookPlane, { rotate: -14 });
+
+                // TRIPTYCH — sentences arrive one by one
+                gsap.to(tri1, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' });
+                gsap.to(tri2, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.7 });
+                gsap.to(tri3, {
+                    opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 1.4,
+                    onComplete() {
+                        // "launched" starts terracotta, then settles to charcoal
+                        setTimeout(() => {
+                            launched.style.transition = 'color 1.6s ease';
+                            launched.style.color = '#2B2B2B';
+                        }, 500);
+                    }
+                });
+
+                const DELAY = 2.2; // seconds before plane launches
+
+                // PLANE — fade in at launch
+                gsap.to(planeWrap, { opacity: 1, duration: 0.25, delay: DELAY });
+
+                // X: linear, left edge to past right edge
+                gsap.to(planeWrap, { x: W + 220, duration: 3.1, delay: DELAY, ease: 'none' });
+
+                // Y: parabola — rise (power2.out) then fall (power2.in)
+                gsap.to(planeWrap, { y: H * 0.36, duration: 1.55, delay: DELAY,        ease: 'power2.out' });
+                gsap.to(planeWrap, { y: H * 0.56, duration: 1.55, delay: DELAY + 1.55, ease: 'power2.in'  });
+
+                // Rotation follows arc slope: nose up during rise, level, then nose down
+                gsap.to(nookPlane, { rotate: -4, duration: 1.55, delay: DELAY,        ease: 'power1.out' });
+                gsap.to(nookPlane, { rotate: 11, duration: 1.55, delay: DELAY + 1.55, ease: 'power1.in'  });
+
+                // Fade out as plane exits right edge
+                gsap.to(planeWrap, { opacity: 0, duration: 0.45, delay: DELAY + 2.75 });
+
+                // TRAIL DOTS — tan dots drawn on canvas following the plane's path
+                const dots       = [];
+                let lastDotX     = -999;
+                let lastDotY     = -999;
+                const DOT_GAP    = 22;   // px between drops
+                const DOT_LIFE   = 1600; // ms each dot lives
+                let trailActive  = true;
+
+                setTimeout(() => { trailActive = false; }, (DELAY + 3.5) * 1000);
+
+                function drawTrail() {
+                    const pr = nookPlane.getBoundingClientRect();
+                    const sr = ch3Intro.getBoundingClientRect();
+                    const px = pr.left + pr.width  * 0.7 - sr.left; // track near nose
+                    const py = pr.top  + pr.height * 0.4 - sr.top;
+
+                    // Drop a dot when the plane has moved far enough
+                    if (pr.right > sr.left && pr.left < sr.right) {
+                        const dist = Math.hypot(px - lastDotX, py - lastDotY);
+                        if (dist >= DOT_GAP) {
+                            dots.push({ x: px, y: py, born: Date.now() });
+                            lastDotX = px;
+                            lastDotY = py;
+                        }
+                    }
+
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    const now = Date.now();
+
+                    for (let i = dots.length - 1; i >= 0; i--) {
+                        const dot = dots[i];
+                        const age = (now - dot.born) / DOT_LIFE;
+                        if (age >= 1) { dots.splice(i, 1); continue; }
+                        const alpha = (1 - age) * 0.5;
+                        ctx.beginPath();
+                        ctx.arc(dot.x, dot.y, 2.5, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(200, 168, 130, ${alpha})`;
+                        ctx.fill();
+                    }
+
+                    if (trailActive || dots.length > 0) {
+                        requestAnimationFrame(drawTrail);
+                    }
+                }
+
+                setTimeout(drawTrail, DELAY * 1000);
+            }
+
+            // Trigger when section enters the viewport
+            const ch3Observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startCh3Sequence();
+                        ch3Observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            ch3Observer.observe(ch3Intro);
+        }
+
+        // ==================== VICTORY SEQUENCE (LEFT + CENTER + RIGHT) ====================
+        {
+            let victoryDone = false;
+
+            function startVictorySequence() {
+                if (victoryDone) return;
+                victoryDone = true;
+
+                // ── PHASE TIMING ──────────────────────────────────────────
+                // Phase 1 (t=0):   dividers draw + 3 photos drop (last lands ~1.4s)
+                // Phase 2 (t=1.7s): left ticker + right split-flap start together
+                const PHOTOS_DONE_MS = 1700;
+
+                // ── LEFT COLUMN: initial hidden state ──────────────────────
+                const tickCtx    = document.getElementById('nook-tick-ctx');
+                const tickNum    = document.getElementById('nook-tick-num');
+                const tickBadge  = document.getElementById('nook-tick-badge');
+                const miniLadder = document.getElementById('nook-summit-mini-ladder');
+                const tickCap    = document.getElementById('nook-tick-cap');
+                const tickWhisp  = document.getElementById('nook-tick-whisp');
+
+                gsap.set([tickCtx, tickNum, miniLadder], { opacity: 0 });
+                gsap.set([tickCap, tickWhisp], { opacity: 0, y: 8 });
+
+                // ── RIGHT COLUMN: initial hidden state ─────────────────────
+                const NOOK_SF_FINALS   = ['$', '1', '5', '0', 'K', '+'];
+                const NOOK_FLAP_CHARS  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$%#&@!?';
+
+                NOOK_SF_FINALS.forEach((ch, i) => {
+                    const el = document.getElementById(`nook-rc-sc${i}`);
+                    el.textContent = ch;
+                    el.style.cssText = '';
+                    gsap.set(el, { opacity: 0 });
+                });
+                gsap.set('#nook-rc-cap-rev', { opacity: 0, y: 6 });
+                const nookQuoteEl = document.getElementById('nook-rc-quote');
+                nookQuoteEl.classList.remove('faded');
+                gsap.set(nookQuoteEl, { clipPath: 'inset(0 0 100% 0)' });
+                gsap.set('#nook-rc-qrule', { opacity: 0, scaleX: 0 });
+                gsap.set(['#nook-rc-rat', '#nook-rc-cap-rat'], { opacity: 0, y: 10 });
+                gsap.set('#nook-rc-stars', { opacity: 0 });
+                document.querySelectorAll('#nook-rc-stars .v-star').forEach(s => s.classList.remove('lit'));
+
+                // ── PHASE 1: WOVEN THREAD DIVIDERS ────────────────────────
+                const leftPath  = document.querySelector('#nook-div-left  .nook-wt-path');
+                const rightPath = document.querySelector('#nook-div-right .nook-wt-path');
+
+                [leftPath, rightPath].forEach(path => {
+                    const len = path.getTotalLength();
+                    gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
+                });
+
+                gsap.to(leftPath,  { strokeDashoffset: 0, duration: 0.9, ease: 'power2.out', delay: 0 });
+                gsap.to(rightPath, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.out', delay: 0.2 });
+
+                // ── PHASE 1: POLAROID DROP (center column) ────────────────
+                const rotations   = [-2.8, 1.6, -1.2];
+                const photoInners = document.querySelectorAll('.nook-photo-inner');
+
+                photoInners.forEach((inner, i) => {
+                    gsap.set(inner, { y: -120, opacity: 0, rotateZ: rotations[i] });
+                });
+
+                // Photos drop immediately — no delay, they go first
+                gsap.to(photoInners, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.9,
+                    ease: 'power3.out',
+                    stagger: 0.25,
+                    delay: 0,
+                });
+
+                // Parallax scrub — each outer wrapper moves at a different rate
+                const parallaxRates = [-80, -50, -24];
+                document.querySelectorAll('.nook-photo-outer').forEach((outer, i) => {
+                    gsap.to(outer, {
+                        y: parallaxRates[i],
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: '.nook-summit-victory',
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: 1.8,
+                            invalidateOnRefresh: true,
+                        }
+                    });
+                });
+
+                // ── PHASE 2: LEFT + RIGHT start together after photos land ─
+                setTimeout(function() {
+
+                    // LEFT: Ticker countdown 43,000 → 10
+                    gsap.to(tickCtx, { opacity: 1, duration: 0.6, ease: 'power2.out' });
+                    gsap.set(tickNum, { opacity: 1 });
+
+                    const START_RANK = 43000;
+                    const END_RANK   = 10;
+                    const DURATION   = 2600; // ms
+                    const startTime  = Date.now();
+
+                    function easeInCubic(t) { return t * t * t; }
+
+                    tickNum.textContent = START_RANK.toLocaleString();
+
+                    const tickInterval = setInterval(() => {
+                        const elapsed  = Date.now() - startTime;
+                        const progress = Math.min(elapsed / DURATION, 1);
+                        const eased    = easeInCubic(progress);
+
+                        const noise = progress < 0.92
+                            ? Math.floor((Math.random() - 0.5) * (1 - eased) * 800)
+                            : 0;
+
+                        const current = Math.round(START_RANK - eased * (START_RANK - END_RANK) + noise);
+                        tickNum.textContent = Math.max(END_RANK, current).toLocaleString();
+
+                        if (progress >= 1) {
+                            clearInterval(tickInterval);
+                            tickNum.textContent = END_RANK.toString();
+                            tickNum.classList.add('landed');
+                            tickBadge.classList.add('show');
+
+                            // Mini bars rise after brief pause
+                            setTimeout(() => {
+                                gsap.to(miniLadder, { opacity: 1, duration: 0.25 });
+                                miniLadder.querySelectorAll('.nook-summit-mini-bar').forEach((bar, i) => {
+                                    setTimeout(() => {
+                                        bar.style.transition = 'height 0.4s cubic-bezier(0.4,0,0.2,1)';
+                                        bar.style.height = bar.dataset.h + '%';
+                                    }, i * 50);
+                                });
+                            }, 280);
+
+                            // Captions rise after bars settle
+                            const barsDelay = 280 + 9 * 50 + 420;
+                            setTimeout(() => {
+                                gsap.to(tickCap,   { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+                                gsap.to(tickWhisp, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.18 });
+                            }, barsDelay);
+                        }
+                    }, 16);
+
+                    // RIGHT: Split-flap $150K+ (slight offset so ticker context leads by a beat)
+                    const SF_STAGGER_MS = 100;
+                    const SF_START_MS   = 200;
+                    const lastLandMs    = SF_START_MS + (NOOK_SF_FINALS.length - 1) * SF_STAGGER_MS + (10 * 30) + 80;
+
+                    // Split-flap: each character cycles ghost → random glyphs → terra
+                    NOOK_SF_FINALS.forEach((finalChar, i) => {
+                        const el = document.getElementById(`nook-rc-sc${i}`);
+                        const startMs = SF_START_MS + i * SF_STAGGER_MS;
+                        setTimeout(() => {
+                            el.style.opacity = '1';
+                            el.style.color = 'var(--nook-ghost)';
+                            let count = 0;
+                            const flap = setInterval(() => {
+                                count++;
+                                if (count >= 10) {
+                                    clearInterval(flap);
+                                    el.textContent = finalChar;
+                                    el.style.color = 'var(--nook-terracotta)';
+                                } else {
+                                    el.textContent = NOOK_FLAP_CHARS[Math.floor(Math.random() * NOOK_FLAP_CHARS.length)];
+                                }
+                            }, 30);
+                        }, startMs);
+                    });
+
+                    // Color shift: terra → charcoal after all chars land
+                    setTimeout(() => {
+                        NOOK_SF_FINALS.forEach((_, i) => {
+                            const el = document.getElementById(`nook-rc-sc${i}`);
+                            el.style.transition = 'color 0.8s ease';
+                            el.style.color = 'var(--nook-text-charcoal)';
+                        });
+                    }, lastLandMs);
+
+                    // "Annual revenue" caption rises in
+                    gsap.to('#nook-rc-cap-rev', {
+                        opacity: 1, y: 0, duration: 0.4, ease: 'power2.out',
+                        delay: lastLandMs / 1000 + 0.15
+                    });
+
+                    // Quote wipe (clip-path top → bottom)
+                    const QUOTE_DELAY_S  = lastLandMs / 1000 + 0.5;
+                    const QUOTE_DURATION = 1.4;
+                    gsap.to('#nook-rc-quote', {
+                        clipPath: 'inset(0 0 0% 0)',
+                        duration: QUOTE_DURATION,
+                        ease: 'power3.out',
+                        delay: QUOTE_DELAY_S
+                    });
+
+                    const afterQuoteS = QUOTE_DELAY_S + QUOTE_DURATION + 0.12;
+
+                    // Thin rule draws
+                    gsap.to('#nook-rc-qrule', {
+                        opacity: 1, scaleX: 1, duration: 0.5, ease: 'power2.out',
+                        delay: afterQuoteS
+                    });
+
+                    // 4.7 rises
+                    gsap.to('#nook-rc-rat', {
+                        opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+                        delay: afterQuoteS + 0.5
+                    });
+
+                    // Stars fill one by one
+                    const starsDelay = afterQuoteS + 1.15;
+                    gsap.to('#nook-rc-stars', { opacity: 1, duration: 0.01, delay: starsDelay });
+                    document.querySelectorAll('#nook-rc-stars .v-star').forEach((star, i) => {
+                        setTimeout(() => { star.classList.add('lit'); }, (starsDelay + i * 0.12) * 1000);
+                    });
+
+                    // "Customer rating" caption
+                    gsap.to('#nook-rc-cap-rat', {
+                        opacity: 1, y: 0, duration: 0.5, ease: 'power2.out',
+                        delay: afterQuoteS + 1.65
+                    });
+
+                    // Quote fades to ghost after rating lands
+                    setTimeout(() => {
+                        document.getElementById('nook-rc-quote').classList.add('faded');
+                    }, (afterQuoteS + 1.8) * 1000);
+
+                }, PHOTOS_DONE_MS);
+            }
+
+            // Fire when victory section enters viewport
+            const victoryObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startVictorySequence();
+                        victoryObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0, rootMargin: "0px 0px -200px 0px" });
+
+            victoryObserver.observe(document.querySelector('.nook-summit-victory'));
+        }
+
+        // Chapter 2 ScrollTrigger — pin wrapper, drive both sides from same progress
+        // On mobile the split-screen stacks vertically; pin is skipped entirely
+        if (window.innerWidth > 768) {
+            const CH2_STATES      = 5;
+            const CH2_FRAMES      = 8;
+            const CH2_SCROLL_EACH = 800;  // px per state transition
+            const CH2_TOTAL       = (CH2_STATES - 1) * CH2_SCROLL_EACH;
+
+            const ch2LeftStates = Array.from({ length: CH2_STATES }, (_, i) =>
+                document.getElementById(`ch2-ls-${i}`)
+            );
+            const ch2ScrollImg  = document.getElementById('ch2-scroll-img');
+            const ch2Thumb      = document.getElementById('ch2-strip-thumb');
+            const ch2Dots       = document.querySelectorAll('.ch2-sc-dot');
+            const ch2Label      = document.getElementById('ch2-sc-label');
+
+            // Initial state: only state 0 visible
+            ch2LeftStates.forEach((el, i) => {
+                el.style.opacity = i === 0 ? '1' : '0';
+                el.style.pointerEvents = i === 0 ? 'auto' : 'none';
+            });
+
+            let ch2ActiveIndex = 0;
+
+            ScrollTrigger.create({
+                trigger: '#ch2-pin-wrapper',
+                start:   'top top',
+                end:     `+=${CH2_TOTAL}`,
+                pin:     true,
+                scrub:   1.2,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+
+                onUpdate(self) {
+                    const progress = self.progress;
+
+                    // LEFT: crossfade between states
+                    const rawIndex = progress * (CH2_STATES - 1);
+                    const floorIdx = Math.floor(rawIndex);
+                    const frac     = rawIndex - floorIdx;
+
+                    ch2LeftStates.forEach((el, i) => {
+                        let opacity = 0;
+                        if (i === floorIdx)     opacity = 1 - frac;
+                        if (i === floorIdx + 1) opacity = frac;
+                        el.style.opacity = opacity;
+                        el.style.pointerEvents = opacity > 0.5 ? 'auto' : 'none';
+                    });
+
+                    // Update dots and label
+                    const active = Math.round(rawIndex);
+                    if (active !== ch2ActiveIndex) {
+                        ch2ActiveIndex = active;
+                        ch2Dots.forEach((d, i) => d.classList.toggle('on', i === active));
+                        ch2Label.textContent = `${active + 1} of ${CH2_STATES}`;
+                    }
+
+                    // RIGHT: single tall image, scroll from top to bottom
+                    const travel = Math.max(0, ch2ScrollImg.offsetHeight - window.innerHeight);
+                    ch2ScrollImg.style.transform = `translateY(-${progress * travel}px)`;
+
+                    // Scroll thumb — proportional to how much of the image is visible
+                    const thumbH   = Math.min(100, (window.innerHeight / ch2ScrollImg.offsetHeight) * 100);
+                    const thumbTop = progress * (100 - thumbH);
+                    ch2Thumb.style.height = thumbH + '%';
+                    ch2Thumb.style.top    = thumbTop + '%';
+                }
+            });
+        }
+
+
+        // ==================== PEAK ZONE: SPACE + QUOTE ====================
+        // (Quote reveal handled by separate word-by-word IIFE script below)
+        {
+            const peakSpace   = document.getElementById('nook-peak-space');
+            const quoteText   = document.getElementById('nook-peak-quote-text');
+
+            // ── THE SPACE: cream → white, padding compresses, whisper ghosts through ──
+            ScrollTrigger.create({
+                trigger: peakSpace,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1.4,
+                onUpdate(self) {
+                    const p = self.progress;
+
+                    // Background: #FFFEF9 → #FFFFFF
+                    const g = Math.round(254 + (255 - 254) * p);
+                    const b = Math.round(249 + (255 - 249) * p);
+                    peakSpace.style.background = `rgb(255, ${g}, ${b})`;
+
+                    // Padding: 80px → 40px — world opening up, lands at quote's native padding
+                    const pad = Math.round(80 - (40 * Math.min(p * 1.6, 1)));
+                    peakSpace.style.padding = `0 ${pad}px`;
+
+
+                }
+            });
+
+            // ── THE CREASE: cool gray rule and label appear after tan rule ──
+            const creaseRule  = document.querySelector('.nook-peak-crease-rule');
+            const creaseLabel = document.querySelector('.nook-peak-crease-label');
+
+            // Cool gray rule fades in after tan rule settles
+            gsap.to(creaseRule, {
+                opacity: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: quoteText,
+                    start: 'top 12%',
+                    end: '+=200',
+                    scrub: 1.5,
+                    invalidateOnRefresh: true,
+                }
+            });
+
+            // Label appears last
+            gsap.to(creaseLabel, {
+                opacity: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: quoteText,
+                    start: 'top 16%',
+                    end: '+=180',
+                    scrub: 1.5,
+                    invalidateOnRefresh: true,
+                }
+            });
+        }
+
+        // ══════════════════════════════════════════
+        // CHAPTER 4 — THE DESCENT ANIMATIONS
+        // ══════════════════════════════════════════
+
+        // LEDGER: Excel spreadsheet builds itself
+        {
+            const grid    = document.getElementById('ledger-grid');
+            const section = document.getElementById('ledger-section');
+            const svg     = document.getElementById('grid-svg');
+            const vSpacing = 42;  // column width
+
+            function generateGrid() {
+                const rect   = section.getBoundingClientRect();
+                const width  = rect.width;
+                const height = rect.height;
+
+                svg.innerHTML = '';
+                svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+                svg.setAttribute('preserveAspectRatio', 'none');
+
+                const horizontalLines = [];
+                const verticalLines = [];
+
+                const vCount = Math.ceil(width / vSpacing);
+                for (let i = 0; i <= vCount; i++) {
+                    const x = i * vSpacing;
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', x);
+                    line.setAttribute('y1', '0');
+                    line.setAttribute('x2', x);
+                    line.setAttribute('y2', height);
+                    line.setAttribute('stroke-dasharray', height);
+                    line.setAttribute('stroke-dashoffset', height);
+                    svg.appendChild(line);
+                    verticalLines.push({ el: line, length: height });
+                }
+
+                // Column letter labels — faint Excel-style headers along the top
+                const colAlpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                for (let i = 0; i < vCount; i++) {
+                    const x = i * vSpacing + vSpacing / 2;
+                    const label = i < 26
+                        ? colAlpha[i]
+                        : colAlpha[Math.floor((i - 26) / 26)] + colAlpha[(i - 26) % 26];
+                    const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    txt.setAttribute('x', x);
+                    txt.setAttribute('y', 18);
+                    txt.setAttribute('text-anchor', 'middle');
+                    txt.setAttribute('font-family', 'Courier New, monospace');
+                    txt.setAttribute('font-size', '6.5');
+                    txt.setAttribute('fill', 'rgba(90,90,90,0.22)');
+                    txt.textContent = label;
+                    svg.appendChild(txt);
+                }
+
+                return { horizontal: horizontalLines, vertical: verticalLines };
+            }
+
+            const lines = generateGrid();
+            let gridBuilt = false;
+
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting && !gridBuilt) {
+                        gridBuilt = true;
+                        gsap.to(grid, { opacity: 1, duration: 0.4 });
+
+                        const allLines = [...lines.horizontal, ...lines.vertical];
+                        allLines.forEach((line, i) => {
+                            setTimeout(() => {
+                                line.el.classList.add('drawing');
+                                gsap.to(line.el, {
+                                    attr: { 'stroke-dashoffset': 0 },
+                                    duration: 0.18,
+                                    ease: 'none',
+                                    onComplete: () => line.el.classList.remove('drawing')
+                                });
+                            }, i * 45);
+                        });
+                    }
+                });
+            }, { threshold: 0.15 });
+            obs.observe(section);
+
+            ScrollTrigger.create({
+                trigger: section,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1.8,
+                onUpdate(self) {
+                    const p = self.progress;
+                    section.style.background = `rgb(255, ${Math.round(254 - p*7)}, ${Math.round(249 - p*20)})`;
+                }
+            });
+        }
+
+        // LEDGER ROWS: typewriter effect
+        {
+            const rows = document.querySelectorAll('.ledger-row');
+
+            rows.forEach(row => {
+                const textEl = row.querySelector('.ledger-row-text');
+                const text = textEl.textContent;
+                textEl.innerHTML = '';
+
+                [...text].forEach(char => {
+                    const span = document.createElement('span');
+                    span.className = char === ' ' ? 'char space' : 'char';
+                    span.textContent = char;
+                    textEl.appendChild(span);
+                });
+            });
+
+            rows.forEach(row => {
+                let typed = false;
+                const obs = new IntersectionObserver(entries => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting && !typed) {
+                            typed = true;
+
+                            const rowNum = row.querySelector('.ledger-row-num');
+                            gsap.to(rowNum, { opacity: 1, duration: 0.3 });
+
+                            const chars = row.querySelectorAll('.char');
+                            const isHighlight = row.classList.contains('less-life');
+                            const finalCharDelay = isHighlight ? 0.02 : 0.012;
+                            const finalTypingDur = isHighlight ? 0.12 : 0.08;
+
+                            chars.forEach((char, i) => {
+                                setTimeout(() => {
+                                    char.classList.add('typing');
+                                    gsap.to(char, {
+                                        opacity: 1,
+                                        duration: finalTypingDur,
+                                        ease: 'power1.out',
+                                        onComplete: () => {
+                                            setTimeout(() => char.classList.remove('typing'), 80);
+                                        }
+                                    });
+                                }, (0.4 + i * finalCharDelay) * 1000);
+                            });
+
+                            obs.unobserve(e.target);
+                        }
+                    });
+                }, { threshold: 0.25 });
+                obs.observe(row);
+            });
+        }
+
+        // NETWORK DIAGRAM
+        {
+            const section = document.getElementById('network-section');
+            const eyebrow = document.getElementById('net-eyebrow');
+
+            const lines = ['nl-1','nl-2','nl-3','nl-4','nl-5','nl-6','nl-7'];
+            lines.forEach(id => {
+                const el = document.getElementById(id);
+                const len = el.getTotalLength ? el.getTotalLength() : 300;
+                el.style.strokeDasharray  = len;
+                el.style.strokeDashoffset = len;
+            });
+            ['nl-c1','nl-c2'].forEach(id => {
+                document.getElementById(id).style.opacity = 0;
+            });
+
+            // Cost label: snaps in red, blinks 3x like a negative Excel cell, settles to muted
+            function animateCostLabel(id) {
+                const el = document.getElementById(id);
+                if (!el) return;
+                gsap.set(el, { fill: '#C0392B' });
+                gsap.to(el, { opacity: 1, duration: 0.15, ease: 'none', onComplete: () => {
+                    gsap.timeline()
+                        .to(el, { opacity: 0.1, duration: 0.08, ease: 'none' })
+                        .to(el, { opacity: 1,   duration: 0.08, ease: 'none' })
+                        .to(el, { opacity: 0.1, duration: 0.08, ease: 'none' })
+                        .to(el, { opacity: 1,   duration: 0.08, ease: 'none' })
+                        .to(el, { opacity: 0.1, duration: 0.08, ease: 'none' })
+                        .to(el, { opacity: 1,   duration: 0.08, ease: 'none' })
+                        .to(el, { fill: '#7A8FA0', duration: 0.5, ease: 'power1.out' });
+                }});
+            }
+
+            const sequence = [
+                { type: 'eyebrow' },
+                { type: 'node',  id: 'nn-1', label: 'nl-lbl-1', label2: 'nl-lbl-1b' },
+                { type: 'line',  id: 'nl-1', cost: 'nc-2' },
+                { type: 'node',  id: 'nn-2', label: 'nl-lbl-2', label2: 'nl-lbl-2b' },
+                { type: 'line',  id: 'nl-2' },
+                { type: 'node',  id: 'nn-3', label: 'nl-lbl-3', label2: 'nl-lbl-3b' },
+                { type: 'line',  id: 'nl-3', cost: 'nc-4' },
+                { type: 'node',  id: 'nn-4', label: 'nl-lbl-4' },
+                { type: 'line',  id: 'nl-4', cost: 'nc-5' },
+                { type: 'line',  id: 'nl-5', cost: 'nc-6' },
+                { type: 'node',  id: 'nn-5', label: 'nl-lbl-5' },
+                { type: 'node',  id: 'nn-6', label: 'nl-lbl-6' },
+                { type: 'line',  id: 'nl-6', cost: 'nc-7' },
+                { type: 'node',  id: 'nn-7', label: 'nl-lbl-7' },
+                { type: 'chaos', id: 'nl-c1' },
+                { type: 'chaos', id: 'nl-c2' },
+                { type: 'line',  id: 'nl-7' },
+                { type: 'node',  id: 'nn-8', label: 'nl-lbl-8', label2: 'nl-lbl-8b', label3: 'nl-lbl-8c' },
+            ];
+
+            let netDone = false;
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting && !netDone) {
+                        netDone = true;
+                        obs.disconnect();
+                        sequence.forEach((step, i) => {
+                            setTimeout(() => {
+                                if (step.type === 'eyebrow') {
+                                    gsap.to(eyebrow, { opacity: 1, duration: 0.5 });
+                                } else if (step.type === 'node') {
+                                    gsap.to(document.getElementById(step.id), { opacity: 1, duration: 0.4, ease: 'power2.out' });
+                                    if (step.label)  gsap.to(document.getElementById(step.label),  { opacity: 1, duration: 0.4, delay: 0.1 });
+                                    if (step.label2) gsap.to(document.getElementById(step.label2), { opacity: 1, duration: 0.4, delay: 0.15 });
+                                    if (step.label3) {
+                                        gsap.to(document.getElementById(step.label3), { opacity: 1, duration: 0.4, delay: 0.2 });
+
+                                        setTimeout(() => {
+                                            [step.id, step.label, step.label2, step.label3].forEach(id => {
+                                                document.getElementById(id).classList.add('game-over-blink');
+                                            });
+                                            setTimeout(() => {
+                                                [step.id, step.label, step.label2, step.label3].forEach(id => {
+                                                    document.getElementById(id).classList.remove('game-over-blink');
+                                                });
+                                            }, 1600);
+                                        }, 600);
+                                    }
+                                } else if (step.type === 'line') {
+                                    const lineCost = step.cost || null;
+                                    gsap.to(document.getElementById(step.id), {
+                                        strokeDashoffset: 0, duration: 0.5, ease: 'power2.out',
+                                        onComplete: lineCost ? () => animateCostLabel(lineCost) : undefined
+                                    });
+                                } else if (step.type === 'chaos') {
+                                    gsap.to(document.getElementById(step.id), { opacity: 1, duration: 0.6 });
+                                }
+                            }, i * 220);
+                        });
+                    }
+                });
+            }, { threshold: 0.2 });
+            obs.observe(section);
+        }
+
+        // HINGE
+        {
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        gsap.to(document.getElementById('hinge-text'), {
+                            opacity: 1,
+                            duration: 1.6,
+                            ease: 'power1.out'
+                        });
+                        obs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            obs.observe(document.getElementById('hinge-section'));
+        }
+
+        // EXCEL BLOW
+        {
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        gsap.to(document.getElementById('blow-excel-text'), {
+                            opacity: 1,
+                            y: 0,
+                            duration: 1.1,
+                            ease: 'power2.out'
+                        });
+                        obs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            obs.observe(document.getElementById('blow-excel'));
+        }
+
+        // THE CELL
+        {
+            const cellWrap    = document.getElementById('cell-wrap');
+            const cell        = document.getElementById('the-cell');
+            const cellValue   = document.getElementById('cell-value');
+            const cellCaption = document.getElementById('cell-caption');
+
+            gsap.set(cellWrap, { opacity: 0, y: 18 });
+            let done = false;
+
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting && !done) {
+                        done = true;
+                        gsap.to(cellWrap, { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' });
+
+                        setTimeout(() => {
+                            const start = 50000, end = 100000, dur = 2600;
+                            const t0 = Date.now();
+                            const tick = setInterval(() => {
+                                const p     = Math.min((Date.now() - t0) / dur, 1);
+                                const eased = p * p;
+                                cellValue.textContent = '$' + Math.round(start + eased * (end - start)).toLocaleString();
+                                if (p >= 1) {
+                                    clearInterval(tick);
+                                    cellValue.textContent = '$100,000';
+                                    setTimeout(() => {
+                                        cell.classList.add('error');
+                                        setTimeout(() => {
+                                            gsap.to(cellCaption, { opacity: 1, duration: 0.6, ease: 'power2.out' });
+                                        }, 600);
+                                    }, 380);
+                                }
+                            }, 16);
+                        }, 1000);
+                    }
+                });
+            }, { threshold: 0.45 });
+            obs.observe(document.getElementById('cell-section'));
+        }
+
+        // CONCLUSION: compression
+        {
+            const container = document.getElementById('conclusion-container');
+            const section   = document.getElementById('conclusion-section');
+
+            ['cp-1', 'cp-2'].forEach((id, i) => {
+                const el = document.getElementById(id);
+                const obs = new IntersectionObserver(entries => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) {
+                            gsap.to(el, {
+                                opacity: 1,
+                                duration: 1.2,
+                                ease: 'power2.out',
+                                delay: i * 0.3
+                            });
+                            obs.unobserve(e.target);
+                        }
+                    });
+                }, { threshold: 0.2 });
+                obs.observe(el);
+            });
+
+            ScrollTrigger.create({
+                trigger: section,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1.6,
+                onUpdate(self) {
+                    const p = self.progress;
+
+                    if (window.innerWidth > 740) {
+                        const width = Math.round(720 - p * 400);
+                        container.style.maxWidth = width + 'px';
+                    }
+
+                    const r = Math.round(107 + p * 33);
+                    const g = Math.round(107 + p * 35);
+                    const b = Math.round(107 + p * 38);
+                    const alpha = (1 - p * 0.4).toFixed(3);
+
+                    document.querySelectorAll('.conclusion-para').forEach(el => {
+                        el.style.color = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+                    });
+                }
+            });
+        }
+
+        // ══════════════════════════════════════════
+        // CHAPTER 5 — TERMINAL EQUATION REWRITE
+        // ══════════════════════════════════════════
+
+        // TERMINAL EQUATION REWRITE ANIMATION
+        {
+            const section = document.getElementById('terminal-section');
+
+            function animateEquation(lineId, cursorId, progress) {
+                const line = document.getElementById(lineId);
+                const oldText = line.querySelector('.eq-old');
+                const arrow = line.querySelector('.eq-arrow');
+                const newText = line.querySelector('.eq-new');
+                const cursor = document.getElementById(cursorId);
+
+                // Phase 1 (0-0.25): Cursor appears, blinks
+                if (progress < 0.25) {
+                    const cursorP = progress / 0.25;
+                    cursor.style.opacity = cursorP;
+                }
+
+                // Phase 2 (0.25-0.5): Old text fades out
+                if (progress >= 0.25 && progress < 0.5) {
+                    const fadeP = (progress - 0.25) / 0.25;
+                    oldText.style.opacity = 1 - fadeP;
+                }
+
+                // Phase 3 (0.4-0.6): Arrow appears
+                if (progress >= 0.4 && progress < 0.6) {
+                    const arrowP = (progress - 0.4) / 0.2;
+                    arrow.style.opacity = arrowP;
+                }
+
+                // Phase 4 (0.5-0.85): New text types in
+                if (progress >= 0.5 && progress < 0.85) {
+                    const newP = (progress - 0.5) / 0.35;
+                    newText.style.opacity = newP;
+
+                    // Start morphing to serif partway through
+                    if (newP > 0.6) {
+                        const morphP = (newP - 0.6) / 0.4;
+                        newText.classList.add('morph-serif');
+                    }
+                }
+
+                // Phase 5 (0.85-1.0): Cursor fades out
+                if (progress >= 0.85) {
+                    const cursorFadeP = (progress - 0.85) / 0.15;
+                    cursor.style.opacity = 1 - cursorFadeP;
+                }
+            }
+
+            ScrollTrigger.create({
+                trigger: section,
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 1.5,
+                onUpdate(self) {
+                    const p = self.progress;
+
+                    // Comment 1 appears early
+                    if (p >= 0.05) {
+                        const c1P = Math.min(1, (p - 0.05) / 0.1);
+                        document.getElementById('comment-1').style.opacity = c1P;
+                    }
+
+                    // Equation 1: 0.15 - 0.35
+                    if (p >= 0.15 && p < 0.35) {
+                        const eq1P = (p - 0.15) / 0.2;
+                        animateEquation('eq-1', 'cursor-1', eq1P);
+                    }
+
+                    // Equation 2: 0.35 - 0.55
+                    if (p >= 0.35 && p < 0.55) {
+                        const eq2P = (p - 0.35) / 0.2;
+                        animateEquation('eq-2', 'cursor-2', eq2P);
+                    }
+
+                    // Equation 3: 0.55 - 0.75
+                    if (p >= 0.55 && p < 0.75) {
+                        const eq3P = (p - 0.55) / 0.2;
+                        animateEquation('eq-3', 'cursor-3', eq3P);
+                    }
+
+                    // Comment 2 appears
+                    if (p >= 0.75) {
+                        const c2P = Math.min(1, (p - 0.75) / 0.1);
+                        document.getElementById('comment-2').style.opacity = c2P;
+                    }
+
+                    // Final equation: 0.8 - 1.0
+                    if (p >= 0.8) {
+                        const eqFP = (p - 0.8) / 0.2;
+                        const finalLine = document.getElementById('eq-final');
+                        const finalNew = finalLine.querySelector('.eq-new');
+                        const finalCursor = document.getElementById('cursor-final');
+
+                        finalNew.style.opacity = eqFP;
+                        finalCursor.style.opacity = eqFP;
+
+                        // Morph to serif and amber
+                        if (eqFP > 0.5) {
+                            const morphP = (eqFP - 0.5) / 0.5;
+                            finalNew.classList.add('morph-serif');
+                            finalNew.style.fontSize = `${20 + morphP * 6}px`;
+                        }
+                    }
+
+                    // Global color temperature shift
+                    if (p >= 0.4) {
+                        const warmP = Math.min(1, (p - 0.4) / 0.6);
+
+                        // Shift terminal border color from green to amber
+                        const r = Math.round(76 + warmP * 125);   // 76 → 201
+                        const g = Math.round(175 - warmP * 7);    // 175 → 168
+                        const b = Math.round(80 + warmP * 26);    // 80 → 106
+
+                        document.querySelector('.terminal-window').style.borderColor =
+                            `rgba(${r}, ${g}, ${b}, ${0.3 + warmP * 0.4})`;
+
+                        document.querySelector('.terminal-window').style.boxShadow =
+                            `0 0 60px rgba(${r}, ${g}, ${b}, ${0.15 + warmP * 0.15})`;
+                    }
+                }
+            });
+
+        }
+
+        // CLOSING PARAGRAPHS — P1 and P2 fade in sequentially
+        {
+            ['closing-p1', 'closing-p2'].forEach((id, i) => {
+                const el = document.getElementById(id);
+                const obs = new IntersectionObserver(entries => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) {
+                            gsap.to(el, {
+                                opacity: 1,
+                                duration: 3.2,
+                                ease: 'power1.out',
+                                delay: i * 0.5
+                            });
+                            obs.unobserve(e.target);
+                        }
+                    });
+                }, { threshold: 0.6, rootMargin: '0px 0px -15% 0px' });
+                obs.observe(el);
+            });
+        }
+
+        // CLOSING P3 — decorative rule draws in, then P3 blurs in and phrase warms to terracotta
+        {
+            let closingP3Triggered = false;
+            const rule    = document.getElementById('closing-engraving-rule');
+            const rect1   = document.getElementById('closing-rule-rect-1');
+            const rect2   = document.getElementById('closing-rule-rect-2');
+            const rect3   = document.getElementById('closing-rule-rect-3');
+            const p3El    = document.getElementById('closing-p3');
+            const phrase  = document.getElementById('closing-climax-phrase');
+            const blurP3  = document.querySelector('#nook-closing-blur-p3 feGaussianBlur');
+
+            const closingP3Obs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting && !closingP3Triggered) {
+                        closingP3Triggered = true;
+                        closingP3Obs.disconnect();
+
+                        const tl = gsap.timeline();
+
+                        tl.to(rule, { opacity: 1, duration: 0.5, ease: 'power1.out' });
+                        if (rect1) tl.to(rect1, { attr: { width: 320 }, duration: 1.1, ease: 'power2.inOut' }, '<');
+                        if (rect2) tl.to(rect2, { attr: { width: 320 }, duration: 1.1, ease: 'power2.inOut' }, '<+=0.08');
+                        if (rect3) tl.to(rect3, { attr: { width: 320 }, duration: 1.1, ease: 'power2.inOut' }, '<+=0.08');
+
+                        tl.to(p3El, { opacity: 1, duration: 2.0, ease: 'power2.out' }, '+=0.4');
+                        if (blurP3) tl.to(blurP3, { attr: { stdDeviation: 0 }, duration: 2.0, ease: 'power2.out' }, '<');
+                        tl.to(phrase, { color: '#d4664a', duration: 1.4, ease: 'power1.out' }, '>-0.9');
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            closingP3Obs.observe(rule);
+        }
+
+    </script>
+
+    <!-- ══════════════════════════════════════════
+         CH3 PEAK ZONE — Verdict word-by-word reveal
+         Each word rises into view from below its clip container.
+         One-shot IntersectionObserver at 25% threshold.
+         Separate script per project convention.
+         ══════════════════════════════════════════ -->
+    <script>
+        (function () {
+            var FULL_TEXT = "Nook Nook climbed to become one of the top ten selling doormats on Amazon despite prices nearly double our competitors\u2019. We achieved consistent six-figure annual revenue and a 4.7-star rating\u2014among the highest customer satisfaction scores in our category.";
+
+            var verdictReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var verdictTriggered = false;
+
+            var quoteEl = document.getElementById('nook-peak-quote-text');
+            var ruleEl  = document.querySelector('.nook-peak-quote-rule');
+
+            // Build word DOM — split on spaces, wrap each word in clip/inner structure.
+            function buildWordSpans(text) {
+                var words = text.split(' ');
+                var fragment = document.createDocumentFragment();
+                words.forEach(function (word) {
+                    var clip  = document.createElement('span');
+                    var inner = document.createElement('span');
+                    clip.className  = 'nook-word-clip';
+                    inner.className = 'nook-word-inner';
+                    inner.textContent = word;
+                    clip.appendChild(inner);
+                    fragment.appendChild(clip);
+                });
+                return fragment;
+            }
+
+            // Clear the placeholder comment and inject word spans
+            quoteEl.innerHTML = '';
+            quoteEl.appendChild(buildWordSpans(FULL_TEXT));
+
+            // Reduced motion fallback: snap all words visible immediately
+            if (verdictReducedMotion) {
+                var inners = quoteEl.querySelectorAll('.nook-word-inner');
+                inners.forEach(function (el) { el.style.transform = 'translateY(0)'; });
+                if (ruleEl) ruleEl.style.opacity = '0.7';
+                return;
+            }
+
+            function runVerdict() {
+                var inners = quoteEl.querySelectorAll('.nook-word-inner');
+
+                // Each word rises from below its clip — power2.out feels like weight settling.
+                // Stagger 0.075s × 43 words ≈ 3.2s total. Duration 0.55s per word — deliberate, unhurried.
+                gsap.to(inners, {
+                    y: '0%',
+                    duration: 0.55,
+                    ease: 'power2.out',
+                    stagger: 0.075,
+                    onComplete: function () {
+                        if (ruleEl) {
+                            gsap.to(ruleEl, {
+                                opacity: 0.7,
+                                duration: 1.2,
+                                ease: 'power1.out',
+                                delay: 0.15
+                            });
+                        }
+                    }
+                });
+            }
+
+            var verdictObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting && !verdictTriggered) {
+                        verdictTriggered = true;
+                        verdictObserver.disconnect();
+                        runVerdict();
+                    }
+                });
+            }, { threshold: 0.25 });
+
+            var zoneEl = document.getElementById('nook-peak-quote');
+            if (zoneEl) verdictObserver.observe(zoneEl);
+        })();
+    </script>
+
+    <!-- ══════════════════════════════════════════
+         CH3 PEAK ZONE — Split-fade whisper
+         Separate script per project convention (IntersectionObserver IIFE)
+         ══════════════════════════════════════════ -->
+    <script>
+        (function () {
+            var splitTriggered = false;
+            var splitReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            var wordLeft  = document.getElementById('nook-split-left');
+            var splitDot  = document.getElementById('nook-split-dot');
+            var wordRight = document.getElementById('nook-split-right');
+            var peakSpace = document.getElementById('nook-peak-space');
+
+            var FINAL_OPACITY = 0.72;
+            var DOT_OPACITY   = 0.62;
+            var DRIFT         = 48;
+
+            function showStatic() {
+                gsap.set(wordLeft,  { opacity: FINAL_OPACITY, x: 0 });
+                gsap.set(wordRight, { opacity: FINAL_OPACITY, x: 0 });
+                gsap.set(splitDot,  { opacity: DOT_OPACITY });
+            }
+
+            function runSplitAnimation() {
+                gsap.set(wordLeft,  { x: -DRIFT, opacity: 0 });
+                gsap.set(wordRight, { x:  DRIFT, opacity: 0 });
+                gsap.set(splitDot,  { opacity: 0 });
+
+                gsap.to(wordLeft, {
+                    x: 0, opacity: FINAL_OPACITY,
+                    duration: 2.8, ease: 'power2.out', delay: 0.45
+                });
+                gsap.to(wordRight, {
+                    x: 0, opacity: FINAL_OPACITY,
+                    duration: 2.8, ease: 'power2.out', delay: 0.45
+                });
+                gsap.to(splitDot, {
+                    opacity: DOT_OPACITY,
+                    duration: 1.1, ease: 'power1.out', delay: 2.4
+                });
+            }
+
+            if (splitReducedMotion) {
+                showStatic();
+            } else {
+                var splitObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting && !splitTriggered) {
+                            splitTriggered = true;
+                            runSplitAnimation();
+                            splitObserver.disconnect();
+                        }
+                    });
+                }, { threshold: 0.55 });
+
+                if (peakSpace) splitObserver.observe(peakSpace);
+            }
+        })();
+    </script>
+
+    <!-- ══════════════════════════════════════════
+         CH4 COLD TYPE MARKER — IntersectionObserver, fires once
+         Separate script per project convention
+         ══════════════════════════════════════════ -->
+    <script>
+        (function () {
+            var triggered = false;
+            var descentReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            /* Build character spans for "THE DESCENT" */
+            var titleText      = 'THE DESCENT';
+            var titleContainer = document.getElementById('ct-title-container');
+            var charSpans      = [];
+
+            for (var i = 0; i < titleText.length; i++) {
+                var span = document.createElement('span');
+                if (titleText[i] === ' ') {
+                    span.className   = 'nook-ch4-title-char nook-ch4-title-char--space';
+                    span.innerHTML   = '&nbsp;';
+                } else {
+                    span.className   = 'nook-ch4-title-char';
+                    span.textContent = titleText[i];
+                }
+                titleContainer.appendChild(span);
+                charSpans.push(span);
+            }
+
+            var wordEls = [
+                document.getElementById('ct-word-0'),
+                document.getElementById('ct-word-1')
+            ];
+            var ruleEl = document.getElementById('ct-rule');
+            var zone   = document.getElementById('nookDescentZone');
+
+            function showStatic() {
+                wordEls.forEach(function (el) { if (el) el.style.opacity = '1'; });
+                charSpans.forEach(function (el) { el.style.opacity = '1'; });
+                if (ruleEl) ruleEl.style.width = '100%';
+            }
+
+            function runColdType() {
+                /* Phase 1 — "Chapter Four" word-by-word fade */
+                gsap.to(wordEls, {
+                    opacity:  1,
+                    duration: 0.4,
+                    stagger:  0.18,
+                    ease:     'power1.inOut'
+                });
+
+                /* Phase 2 — "THE DESCENT" char-by-char hard toggle, 35ms stagger */
+                var charDelay   = 0.62;
+                var charStagger = 0.035;
+
+                charSpans.forEach(function (el, i) {
+                    gsap.to(el, {
+                        opacity:  1,
+                        duration: 0,
+                        delay:    charDelay + (i * charStagger)
+                    });
+                });
+
+                /* Phase 3 — rule draws left-to-right after all chars are present */
+                var ruleDelay = charDelay + (charSpans.length * charStagger) + 0.14;
+                gsap.to(ruleEl, {
+                    width:    '100%',
+                    duration: 0.5,
+                    ease:     'power1.inOut',
+                    delay:    ruleDelay
+                });
+            }
+
+            if (descentReducedMotion) {
+                showStatic();
+                return;
+            }
+
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting && !triggered) {
+                        triggered = true;
+                        observer.disconnect();
+                        runColdType();
+                    }
+                });
+            }, { threshold: 0.4 });
+
+            if (zone) observer.observe(zone);
+
+        })();
+    </script>
+
+    <!-- CH5 BREATH ANIMATION — separate script to avoid IntersectionObserver silent-fail -->
+    <script>
+        (function() {
+            'use strict';
+
+            var triggered = false;
+            var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function applyReducedMotionState() {
+                var bloom1  = document.getElementById('nookBloom1');
+                var grad1   = document.getElementById('nookBreathGrad1');
+                var eyebrow = document.getElementById('nookBreathEyebrow');
+                var word    = document.getElementById('nookBreathWord');
+                var lines   = document.getElementById('nookBreathLines');
+                var ruleL   = document.getElementById('nookRuleLeft');
+                var ruleR   = document.getElementById('nookRuleRight');
+
+                if (bloom1)  bloom1.setAttribute('opacity', '0.9');
+                if (grad1)   grad1.setAttribute('r', '55%');
+                if (eyebrow) eyebrow.style.opacity = '1';
+                if (word)    word.style.opacity    = '1';
+                if (lines)   lines.style.opacity   = '1';
+                if (ruleL)   ruleL.style.width     = '80px';
+                if (ruleR)   ruleR.style.width     = '80px';
+            }
+
+            function runBreathAnimation() {
+                var grad1   = document.getElementById('nookBreathGrad1');
+                var grad2   = document.getElementById('nookBreathGrad2');
+                var bloom1  = document.getElementById('nookBloom1');
+                var bloom2  = document.getElementById('nookBloom2');
+                var eyebrow = document.getElementById('nookBreathEyebrow');
+                var word    = document.getElementById('nookBreathWord');
+                var lines   = document.getElementById('nookBreathLines');
+                var ruleL   = document.getElementById('nookRuleLeft');
+                var ruleR   = document.getElementById('nookRuleRight');
+
+                if (!grad1 || !bloom1 || !eyebrow || !word) return;
+
+                var tl = gsap.timeline();
+
+                /* Phase 1 — bloom rect appears */
+                tl.to(bloom1, { attr: { opacity: 1 }, duration: 0.5, ease: 'power1.out' }, 0);
+
+                /* Phase 2 — THE EXHALE: gradient radius expands */
+                tl.to(grad1, { attr: { r: '68%' }, duration: 3.2, ease: 'power1.inOut' }, 0.25);
+
+                /* Phase 3 — eyebrow arrives mid-bloom */
+                tl.to(eyebrow, { opacity: 1, duration: 1.3, ease: 'power1.out' }, 1.3);
+
+                /* Phase 4 — Acceptance arrives after the space has opened */
+                tl.to(word, { opacity: 1, duration: 1.6, ease: 'power1.out' }, 2.0);
+
+                /* Phase 5 — secondary bloom: second quieter exhale */
+                tl.to(bloom2, { attr: { opacity: 0.6 }, duration: 0.4, ease: 'power1.out' }, 3.0);
+                tl.to(grad2,  { attr: { r: '80%' },     duration: 2.2, ease: 'power1.inOut' }, 3.0);
+
+                /* Phase 6 — rules draw from center outward */
+                tl.to(lines, { opacity: 1, duration: 0.4, ease: 'power1.out' }, 3.5);
+                tl.to(ruleL, { width: 80,  duration: 1.0, ease: 'power2.out' }, 3.6);
+                tl.to(ruleR, { width: 80,  duration: 1.0, ease: 'power2.out' }, 3.6);
+            }
+
+            var section = document.getElementById('ch5-transition');
+            if (!section) return;
+
+            if (reducedMotion) {
+                var rmObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting && !triggered) {
+                            triggered = true;
+                            applyReducedMotionState();
+                        }
+                    });
+                }, { threshold: 0.1 });
+                rmObserver.observe(section);
+                return;
+            }
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting && !triggered) {
+                        triggered = true;
+                        runBreathAnimation();
+                    }
+                });
+            }, { threshold: 0.25 });
+
+            observer.observe(section);
+
+        })();
+    </script>
+
+    <!-- ══════════════════════════════════════════
+         ENDING ANIMATION — Door wipe + threads + dots
+         Separate IIFE per project convention.
+         ══════════════════════════════════════════ -->
+    <script>
+      (function() {
+        'use strict';
+
+        var triggered = false;
+        var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        /* ---- Build the 24 dot elements ---- */
+        var dotRow = document.getElementById('nookDoorDotRow');
+        if (dotRow) {
+          for (var d = 0; d < 24; d++) {
+            var dot = document.createElement('span');
+            dot.className = 'nook-door-journey-dot';
+            dotRow.appendChild(dot);
+          }
+        }
+
+        var THREAD_IDS = [
+          'nookDoorThread1', 'nookDoorThread2', 'nookDoorThread3', 'nookDoorThread4',
+          'nookDoorThread5', 'nookDoorThread6', 'nookDoorThread7', 'nookDoorThread8'
+        ];
+
+        function prepareThread(el) {
+          var len = el.getTotalLength();
+          el.style.strokeDasharray  = len;
+          el.style.strokeDashoffset = len;
+          return len;
+        }
+
+        function runReducedMotionFallback() {
+          var light   = document.getElementById('nookDoorLight');
+          var dotWrap = document.getElementById('nookDoorDotWrap');
+          var closing = document.getElementById('nookDoorClosingWrap');
+
+          if (light) light.style.clipPath = 'inset(0 0% 0 0%)';
+          if (dotWrap) {
+            dotWrap.style.opacity = '1';
+            var dots = dotWrap.querySelectorAll('.nook-door-journey-dot');
+            for (var i = 0; i < dots.length; i++) {
+              dots[i].style.opacity = '0.28';
+            }
+          }
+          if (closing) closing.style.opacity = '0.7';
+
+          THREAD_IDS.forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) {
+              var len = el.getTotalLength();
+              el.style.strokeDasharray  = len;
+              el.style.strokeDashoffset = 0;
+            }
+          });
+        }
+
+        function runEndingAnimation() {
+          var light   = document.getElementById('nookDoorLight');
+          var dotWrap = document.getElementById('nookDoorDotWrap');
+          var closing = document.getElementById('nookDoorClosingWrap');
+          var dots    = dotWrap ? dotWrap.querySelectorAll('.nook-door-journey-dot') : [];
+
+          if (!light) return;
+
+          var threads = THREAD_IDS.map(function(id) {
+            return document.getElementById(id);
+          }).filter(Boolean);
+          threads.forEach(prepareThread);
+
+          gsap.set(dotWrap, { opacity: 0 });
+          gsap.set(closing, { opacity: 0 });
+          for (var i = 0; i < dots.length; i++) {
+            gsap.set(dots[i], { opacity: 0 });
+          }
+
+          var tl = gsap.timeline();
+
+          /* Phase 1 — Door wipes open left to right, 1s pause then 3.2s */
+          tl.fromTo(light,
+            { clipPath: 'inset(0 100% 0 0%)' },
+            { clipPath: 'inset(0 0% 0 0%)', duration: 3.2, ease: 'power2.out' },
+            1.0
+          );
+
+          /* Phase 2 — Threads draw in, top to bottom */
+          threads.forEach(function(thread, i) {
+            tl.to(thread, {
+              strokeDashoffset: 0,
+              duration: 1.0,
+              ease: 'power1.inOut'
+            }, 2.0 + i * 0.35);
+          });
+
+          /* Phase 3 — Dot row surfaces */
+          tl.to(dotWrap, { opacity: 1, duration: 0.4, ease: 'power1.out' }, 4.4);
+          for (var j = 0; j < dots.length; j++) {
+            tl.to(dots[j], { opacity: 0.28, duration: 0.8, ease: 'power1.out' }, 4.5 + j * 0.06);
+          }
+
+          /* Phase 4 — Closing text */
+          tl.to(closing, { opacity: 0.85, duration: 1.4, ease: 'power1.out' }, 6.0);
+        }
+
+        var section = document.getElementById('nookEndingDoor');
+        if (!section) return;
+
+        if (reducedMotion) {
+          var rmObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting && !triggered) {
+                triggered = true;
+                runReducedMotionFallback();
+                rmObs.disconnect();
+              }
+            });
+          }, { threshold: 0.1 });
+          rmObs.observe(section);
+          return;
+        }
+
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting && !triggered) {
+              triggered = true;
+              runEndingAnimation();
+              observer.disconnect();
+            }
+          });
+        }, { threshold: 0.2 });
+
+        observer.observe(section);
+
+      })();
+    </script>
+
+</body>
+</html>
